@@ -22,7 +22,7 @@ def evaluate_mapping_via_llm_batch(unmatched_items: list) -> dict:
     dashscope.api_key = os.environ.get("DASHSCOPE_API_KEY")
     
     if not dashscope.api_key:
-        logger.warning("没有找到千问的大模型密钥(DASHSCOPE_API_KEY)，自动跳过批量C环节大模型求助。")
+        logger.warning("LLM APIキー(DASHSCOPE_API_KEY)が見つかりません。バッチAI推論処理をスキップします。")
         return {}
 
     sys_prompt = """You are an SAP mapping expert. I will provide you with a JSON array containing multiple Source System fields, each with a unique 'row_idx'.
@@ -74,9 +74,9 @@ If you cannot find any mappings, return an empty array for "candidates"."""
                     result_map[idx] = candidates
             return result_map
         else:
-            logger.error(f"大模型批量 API 求助失败: {response.code} {response.message}")
+            logger.error(f"AIモデルバッチAPIの呼び出しに失敗しました: {response.code} {response.message}")
             return {}
             
     except Exception as llm_e:
-        logger.warning(f"大模型批量兜底发生灾难性故障，本批次放弃: {llm_e}\nQwen Output was: {content if 'content' in locals() else 'None'}")
+        logger.warning(f"AIモデルのフォールバック処理で致命的なエラーが発生しました。このバッチは放棄します: {llm_e}\nOutput was: {content if 'content' in locals() else 'None'}")
         return {}

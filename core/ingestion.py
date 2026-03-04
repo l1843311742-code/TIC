@@ -16,7 +16,7 @@ logger = get_logger(__name__)
 
 def parse_excel_for_ingest(file_path: str, sheet_name: str):
     """负责将 Excel 读取到内存，找出已经全填好的行，格式化打包组装。"""
-    logger.info(f"正在扫描试图用来当作学习教材的 Excel 文本: {file_path}")
+    logger.info(f"学習用のExcel教材をスキャンしています: {file_path}")
     wb = openpyxl.load_workbook(file_path, data_only=True)
     
     # 锁定想要找的那个名为 '項目マッピング' 的标签页
@@ -27,7 +27,7 @@ def parse_excel_for_ingest(file_path: str, sheet_name: str):
 
     moto_cell, saki_cell = find_headers(ws)
     if not moto_cell or not saki_cell:
-        logger.error("找不到 '連携元'。表格看起来不合规，略过。")
+        logger.error("「連携元」列が見つかりません。フォーマットが不正なためスキップします。")
         return []
 
     # 表头上一个格子就是源系统的总名字（比如 仓库管理系统）
@@ -38,7 +38,7 @@ def parse_excel_for_ingest(file_path: str, sheet_name: str):
     header_row, col_src_desc, col_src_field, col_src_table, col_sap_desc, col_sap_table, col_sap_field = map_columns(ws, moto_cell, saki_cell)
 
     if None in (col_src_desc, col_src_field, col_sap_desc, col_sap_table, col_sap_field):
-        logger.error("Excel 列不完整，忽略该学习教材！")
+        logger.error("Excelの列が不完全です。この学習教材は無視されます！")
         return []
 
     extracted_data = []
@@ -87,7 +87,7 @@ def process_ingest(path: str, sheet_name: str, db_path: str, collection_name: st
         all_documents.extend(parse_excel_for_ingest(path, sheet_name))
 
     if not all_documents:
-        logger.warning("扫了一大圈没发现能学的有用完整数据。")
+        logger.warning("スキャンしましたが、学習可能な有効なデータが見つかりませんでした。")
         return
 
     # 连接 ChromaDB (如果库不存在会默认创建这个 sqlite 的壳)
@@ -102,7 +102,7 @@ def process_ingest(path: str, sheet_name: str, db_path: str, collection_name: st
         
         # 触发底层大模型计算
         collection.add(ids=ids, metadatas=metadatas, documents=documents)
-        logger.info(f"往现有大脑里新加入了 {len(all_documents)} 个词汇！")
+        logger.info(f"既存のデータベースに {len(all_documents)} 件の新しい語彙を追加しました！")
     except Exception:
         # 这里的意思是：如果前面的 try 里发现没有创建名叫 collection_name 的集合空间，会出异常抛出跳转这里。
         # 在这里我们就新创立一本记忆集。hnsw:cosine代表用向量夹角算法搜查相似度（近义词算法基础）
@@ -113,7 +113,7 @@ def process_ingest(path: str, sheet_name: str, db_path: str, collection_name: st
         documents = [doc['text'] for doc in all_documents]
         
         collection.add(ids=ids, metadatas=metadatas, documents=documents)
-        logger.info(f"为首次运行破土动工，新创建了集合并保存了 {len(all_documents)} 条数据。")
+        logger.info(f"初回実行のため、新しくコレクションを作成し {len(all_documents)} 件のデータを保存しました。")
     
     # [贴心保障] 最后在项目内部，给你硬拷贝生成一份能被人类肉眼看懂的纯文本 CSV 大清单，当用作您的离线查看备份留底！
     from core.config import get_script_dir
@@ -125,4 +125,4 @@ def process_ingest(path: str, sheet_name: str, db_path: str, collection_name: st
     timestamp = datetime.now().strftime("%Y%m%d%H%M%S") # 盖上 2026年3月4日... 邮编戳
     csv_filename = os.path.join(csv_folder, f"ingested_{os.path.basename(os.path.normpath(path))}_{sheet_name}_{timestamp}.csv")
     df.to_csv(csv_filename, index=False, encoding='utf-8-sig') # 写入CSV，带着utf8-sig防中文繁体乱码
-    logger.info(f"为您生成的本地肉眼审查备份表已存入: {csv_filename}")
+    logger.info(f"目視確認用のバックアップデータを保存しました: {csv_filename}")

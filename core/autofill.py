@@ -17,7 +17,7 @@ logger = get_logger(__name__)
 
 def auto_fill_excel(file_path: str, sheet_name: str, db_path: str, collection_name: str):
     """读取一份带有空缺目标字段的 Excel 模板，利用多级漏斗去寻找答案并写回新文件。"""
-    logger.info(f"开始为您指定的残缺表单进行智能填补: {file_path}")
+    logger.info(f"指定された不完全なフォームのスマート補完を開始します: {file_path}")
     
     # 尝试连上记忆库
     client = chromadb.PersistentClient(path=db_path)
@@ -27,7 +27,7 @@ def auto_fill_excel(file_path: str, sheet_name: str, db_path: str, collection_na
         collection = client.get_collection(name=collection_name)
     except Exception as e:
         # 万一以前根本没选过 [1] 学习功能，直接抛个错。不要紧，它照旧会坚强地运行大模型C兜底功能。
-        logger.warning(f"目前记忆库里没有内容 或 库没建好. 将全盘依赖大模型发威. 具体原因: {e}")
+        logger.warning(f"現在、記憶データベースが空または未構築です。LLMに完全に依存して処理します。詳細: {e}")
 
     # 开箱 Excel
     wb = openpyxl.load_workbook(file_path)
@@ -60,16 +60,20 @@ def auto_fill_excel(file_path: str, sheet_name: str, db_path: str, collection_na
             
     if not col_match_source:
         col_match_source = ws.max_column + 1
-        ws.cell(row=header_row, column=col_match_source).value = "マッチ結果元"
+        ws.cell(row=header_row, column=col_match_source).value = "マッチソース"
     # ====================================================
     # 阶段零：收集全部目标
     # ====================================================
     candidates = []
     for row_idx in range(header_row + 1, ws.max_row + 1):
-        src_field = str(ws.cell(row=row_idx, column=col_src_field).value or "").strip()
-        src_desc = str(ws.cell(row=row_idx, column=col_src_desc).value or "").strip()
-        src_table = str(ws.cell(row=row_idx, column=col_src_table).value or "").strip() if col_src_table else ""
-        
+        src_desc = str(ws.cell(row=row_idx, column=col_src_desc).value).strip() if col_src_desc and ws.cell(row=row_idx, column=col_src_desc).value else ""
+        src_table = str(ws.cell(row=row_idx, column=col_src_table).value).strip() if col_src_table and ws.cell(row=row_idx, column=col_src_table).value else ""
+        src_field = str(ws.cell(row=row_idx, column=col_src_field).value).strip() if col_src_field and ws.cell(row=row_idx, column=col_src_field).value else ""
+
+        # 如果源端三要素全是空的，没必要搜（连搜的前提都没有），直接跳过
+        if not src_desc and not src_table and not src_field:
+            continue
+                
         sap_table = ws.cell(row=row_idx, column=col_sap_table).value
         sap_field = ws.cell(row=row_idx, column=col_sap_field).value
         
@@ -92,7 +96,7 @@ def auto_fill_excel(file_path: str, sheet_name: str, db_path: str, collection_na
     # 这一步属于本地轻量元数据查表，本身处于毫秒级，直接用 for 循环秒刷
     # ===============================================================
     if candidates and collection:
-        logger.info(f"开启 A 级精确查询: {len(candidates)} 项待办...")
+        logger.info(f"レベルA 完全一致検索を開始: {len(candidates)} 件...")
         for c in candidates:
             try:
                 results = collection.query(
@@ -115,11 +119,11 @@ def auto_fill_excel(file_path: str, sheet_name: str, db_path: str, collection_na
                     ws.cell(row=c["row_idx"], column=col_match_source).value = '完全一致'
                     
                     filled_count += 1
-                    logger.info(f"Exact Match (级别 A) 命中: {c['src_field']} -> {top_match.get('sap_table_name')}.{top_match.get('sap_field_name')}")
+                    logger.info(f"Exact Match (レベルA) ヒット: {c['src_field']} -> {top_match.get('sap_table_name')}.{top_match.get('sap_field_name')}")
                 else:
                     vector_candidates.append(c)
             except Exception as e:
-                logger.warning(f"发生故障放弃精确查询 '{c['src_field']}': {e}")
+                logger.warning(f"完全一致検索 '{c['src_field']}' を放棄しました: {e}")
                 vector_candidates.append(c)
     elif candidates and not collection:
         # 如果连记忆库都没有，跳过本地搜索直接给大模型兜底
@@ -132,7 +136,7 @@ def auto_fill_excel(file_path: str, sheet_name: str, db_path: str, collection_na
     # 利用 ChromaDB 批量推理来节省计算所有语句的 Vector Embedding 耗时！
     # ===============================================================
     if vector_candidates and collection:
-        logger.info(f"开启 B 级批量向量映射查询: {len(vector_candidates)} 项待办...")
+        logger.info(f"レベルB バッチ・ベクトルマッピング検索を開始: {len(vector_candidates)} 件...")
         query_texts = [c["doc_text"] for c in vector_candidates]
         
         try:
@@ -172,14 +176,14 @@ def auto_fill_excel(file_path: str, sheet_name: str, db_path: str, collection_na
                          ws.cell(row=c["row_idx"], column=col_match_source).value = 'ベクトル'
                          
                          filled_count += 1
-                         logger.info(f"Vector Match (级别 B) 命中 {len(valid_matches)} 条: 首选 {c['src_field']} -> {valid_matches[0][1].get('sap_table_name')}.{valid_matches[0][1].get('sap_field_name')}")
+                         logger.info(f"Vector Match (レベルB) ヒット {len(valid_matches)} 件: 第一候補 {c['src_field']} -> {valid_matches[0][1].get('sap_table_name')}.{valid_matches[0][1].get('sap_field_name')}")
                      else:
-                         logger.info(f"库里搜到了 '{c['src_field']}' 近似词, 但误差全部 >= 0.10 未达标，直接丢给大模型.")
+                         logger.info(f"DB内で '{c['src_field']}' の類似語が見つかりましたが、誤差がすべて >= 0.10 で基準を満たしていません。AIモデルに回します。")
                          unmatched_for_llm.append(c)
                  else:
                      unmatched_for_llm.append(c)
         except Exception as e:
-             logger.warning(f"发生故障放弃批量向量查询: {e}")
+             logger.warning(f"バッチ・ベクトル検索を放棄しました: {e}")
              unmatched_for_llm.extend(vector_candidates)
     elif vector_candidates and not collection:
         unmatched_for_llm = vector_candidates
@@ -189,7 +193,7 @@ def auto_fill_excel(file_path: str, sheet_name: str, db_path: str, collection_na
     # 只要攒够了没做出来的题，一次性发给老师改卷，节约无数个 HTTP 网络开销时间！
     # ===============================================================
     if unmatched_for_llm:
-        logger.info(f"正在将 {len(unmatched_for_llm)} 条未命中数据一并打包发给大模型推理...")
+        logger.info(f"ヒットしなかった {len(unmatched_for_llm)} 件のデータをAIモデルに一斉送信し、推論を実行します...")
         
         # O(1) 的字典返回结果
         batch_results = evaluate_mapping_via_llm_batch(unmatched_for_llm)
@@ -219,10 +223,10 @@ def auto_fill_excel(file_path: str, sheet_name: str, db_path: str, collection_na
                 ws.cell(row=r_idx, column=col_match_source).value = 'AIモデル'
 
                 filled_count += 1
-                logger.info(f"Qwen 批量回填成功: 行 {r_idx} 提供了 {len(candidates)} 个候选结果。")
+                logger.info(f"LLM バッチ補完成功: 行 {r_idx} で {len(candidates)} 件の候補結果を提供しました。")
             else:
                 ws.cell(row=r_idx, column=col_match_source).value = '未匹配'
-                logger.info(f"Qwen 大模型也编造不出行 {r_idx} '{item['src_field']}'，宣告彻底放弃！")
+                logger.info(f"AIモデルも行 {r_idx} '{item['src_field']}' を推論できませんでした。完全放棄！")
     
     # 全部填写完毕！输出保存。
     if filled_count > 0:
@@ -235,9 +239,9 @@ def auto_fill_excel(file_path: str, sheet_name: str, db_path: str, collection_na
         timestamp = datetime.now().strftime("%Y%m%d%H%M%S")
         new_filename = os.path.join(autofilled_folder, f"{base}_autofilled_{timestamp}{ext}")
         wb.save(new_filename)
-        logger.info(f"大成功！成功用魔法填补了 {filled_count} 行！全新文件已安全落地: {new_filename}")
+        logger.info(f"大成功！合計 {filled_count} 行を補完しました！新しいファイルに保存しました: {new_filename}")
     else:
-        logger.info("没有任何行被填上。（可能是没空缺可以填，或者三个级别全部战败没有搜到对应选项）。")
+        logger.info("補完された行はありませんでした。（補完する空欄がない、または全レベル検索でヒットなし）。")
 
 def process_autofill(path: str, sheet_name: str, db_path: str, collection_name: str):
     """一个小型路由器：用来决定用户丢进来的是一个文件字典文件夹结构，还是单独一个文件，然后依次下发去运行上方的 auto_fill。"""
