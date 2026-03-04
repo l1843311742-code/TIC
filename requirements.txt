@@ -1,0 +1,4 @@
+﻿openpyxl
+lancedb
+pandas
+dashscope

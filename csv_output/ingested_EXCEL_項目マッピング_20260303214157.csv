@@ -1,0 +1,6 @@
+﻿id,text,source_system_name,source_field_name,source_field_desc,sap_table_name,sap_field_name,sap_field_desc
+mapping_D:\antigravity\TIC\EXCEL\1.xlsx_14,源系统: 倉庫システム | 源系统字段名: BYUS | 源系统字段描述: 便コード | SAP系统表名: LIKP | SAP系统字段名: VSART | SAP系统字段描述: 出荷タイプ,倉庫システム,BYUS,便コード,LIKP,VSART,出荷タイプ
+mapping_D:\antigravity\TIC\EXCEL\1.xlsx_15,源系统: 倉庫システム | 源系统字段名: BUNS | 源系统字段描述: 運送会社コード | SAP系统表名: LIPS | SAP系统字段名: AESKD | SAP系统字段描述: 得意先設計変更ステータス,倉庫システム,BUNS,運送会社コード,LIPS,AESKD,得意先設計変更ステータス
+mapping_D:\antigravity\TIC\EXCEL\1.xlsx_17,源系统: 倉庫システム | 源系统字段名: SKUC | 源系统字段描述: 口数 | SAP系统表名: LIPS | SAP系统字段名: EAN11 | SAP系统字段描述: 国際商品コード (EAN/UPC),倉庫システム,SKUC,口数,LIPS,EAN11,国際商品コード (EAN/UPC)
+mapping_D:\antigravity\TIC\EXCEL\1.xlsx_20,源系统: 倉庫システム | 源系统字段名: BNFD | 源系统字段描述: 荷札№ | SAP系统表名: LIPS | SAP系统字段名: AESKD | SAP系统字段描述: 得意先設計変更ステータス,倉庫システム,BNFD,荷札№,LIPS,AESKD,得意先設計変更ステータス
+mapping_D:\antigravity\TIC\EXCEL\1.xlsx_21,源系统: 倉庫システム | 源系统字段名: SRSYK | 源系统字段描述: 出荷連絡数 | SAP系统表名: LIPS | SAP系统字段名: LFIMG | SAP系统字段描述: 出荷数量実績 (販売単位),倉庫システム,SRSYK,出荷連絡数,LIPS,LFIMG,出荷数量実績 (販売単位)
