@@ -30,14 +30,17 @@ def parse_excel_for_ingest(file_path: str, sheet_name: str):
         logger.error("「連携元」列が見つかりません。フォーマットが不正なためスキップします。")
         return []
 
-    # 表头上一个格子就是源系统的总名字（比如 仓库管理系统）
-    source_sys_name_cell = ws.cell(row=moto_cell.row + 1, column=moto_cell.column)
-    source_sys_name = str(source_sys_name_cell.value).strip() if source_sys_name_cell.value else "未知源系统"
+    # 获取全套核心列号坐标以及基准锚点
+    header_row, renkei_moto_cell, renkei_saki_cell, col_src_desc, col_src_field, col_src_table, col_sap_desc, col_sap_table, col_sap_field = map_columns(ws, moto_cell, saki_cell)
 
-    # 获取全套 7 个核心列号坐标
-    header_row, col_src_desc, col_src_field, col_src_table, col_sap_desc, col_sap_table, col_sap_field = map_columns(ws, moto_cell, saki_cell)
+    # 提取表头上部的各自系统大名称（比如 仓库管理系统 和 部品SAP）
+    moto_sys_name_cell = ws.cell(row=renkei_moto_cell.row + 1, column=renkei_moto_cell.column)
+    moto_sys_name = str(moto_sys_name_cell.value).strip() if moto_sys_name_cell.value else "未知Moto系"
 
-    if None in (col_src_desc, col_src_field, col_sap_desc, col_sap_table, col_sap_field):
+    saki_sys_name_cell = ws.cell(row=renkei_saki_cell.row + 1, column=renkei_saki_cell.column)
+    saki_sys_name = str(saki_sys_name_cell.value).strip() if saki_sys_name_cell.value else "未知Saki系"
+
+    if None in (col_src_desc, col_src_field, col_sap_table, col_sap_field):
         logger.error("Excelの列が不完全です。この学習教材は無視されます！")
         return []
 
@@ -50,24 +53,42 @@ def parse_excel_for_ingest(file_path: str, sheet_name: str):
         src_table = str(ws.cell(row=row_idx, column=col_src_table).value or "").strip() if col_src_table else ""
         sap_table = str(ws.cell(row=row_idx, column=col_sap_table).value or "").strip()
         sap_field = str(ws.cell(row=row_idx, column=col_sap_field).value or "").strip()
-        sap_desc = str(ws.cell(row=row_idx, column=col_sap_desc).value or "").strip()
+        sap_desc = str(ws.cell(row=row_idx, column=col_sap_desc).value or "").strip() if col_sap_desc else ""
         
-        # [非常关键]
-        # 我们是系统在主动学习“知识库”，所以我们必须要同时挑出在：
-        # 【源技术名称】、【源中文描述】 并且他们对应着确凿的 【SAP配置表】+【SAP技术名】 的那些“完成体”的行才抓下来背单词。不缺胳膊少腿的才是好学习资料！
+        # [非常关键：双向学习机制]
+        # 我们是系统在主动学习“知识库”，只要两边都不缺胳膊少腿，我们就连背两条！
+        # 1. 顺向 (Moto -> Saki)
+        # 2. 逆向 (Saki -> Moto)
         if src_field and src_desc and sap_table and sap_field:
-            # 就是这里生成那串很长的 [source_xxx...] 给大头模型准备的特定翻译模版文本
-            doc_text = f"[source_system:{source_sys_name}] [source_table:{src_table}] [source_field:{src_field}] [source_description:{src_desc}]"
+            
+            # ====== 方向 1: Moto 找 Saki ======
+            doc_text_forward = f"[source_system:{moto_sys_name}] [source_table:{src_table}] [source_field:{src_field}] [source_description:{src_desc}]"
             extracted_data.append({
-                "id": f"mapping_{file_path}_{row_idx}", # 给这句话编一个独一无二的身份证条形码
-                "text": doc_text,
-                "source_system_name": source_sys_name,
+                "id": f"mapping_{file_path}_{row_idx}_forward", 
+                "text": doc_text_forward,
+                "source_system_name": moto_sys_name,
                 "source_table_name": src_table,
                 "source_field_name": src_field,
                 "source_field_desc": src_desc,
                 "sap_table_name": sap_table,
                 "sap_field_name": sap_field,
                 "sap_field_desc": sap_desc
+            })
+
+            # ====== 方向 2: Saki 找 Moto ======
+            # 注意：源头变成了 Saki，目标变成了 Moto，但为了兼容现有的 Chroma 查询结构（source=查询键, sap=目标键）
+            # 我们把 Saki 放在源对应的维度里：
+            doc_text_backward = f"[source_system:{saki_sys_name}] [source_table:{sap_table}] [source_field:{sap_field}] [source_description:{sap_desc}]"
+            extracted_data.append({
+                "id": f"mapping_{file_path}_{row_idx}_backward",
+                "text": doc_text_backward,
+                "source_system_name": saki_sys_name,
+                "source_table_name": sap_table,  # Saki 变成 Source
+                "source_field_name": sap_field,  # Saki 变成 Source
+                "source_field_desc": sap_desc,   # Saki 变成 Source
+                "sap_table_name": src_table,     # Moto 变成 Target (SAP_table_name 仅作为一个键位代表Target)
+                "sap_field_name": src_field,     # Moto 变成 Target
+                "sap_field_desc": src_desc       # Moto 变成 Target
             })
 
     return extracted_data

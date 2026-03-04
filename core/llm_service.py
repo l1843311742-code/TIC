@@ -19,19 +19,26 @@ def evaluate_mapping_via_llm_batch(unmatched_items: list) -> dict:
         return {}
         
     import dashscope
+    import concurrent.futures
     dashscope.api_key = os.environ.get("DASHSCOPE_API_KEY")
     
     if not dashscope.api_key:
         logger.warning("LLM APIキー(DASHSCOPE_API_KEY)が見つかりません。バッチAI推論処理をスキップします。")
         return {}
 
-    sys_prompt = """You are an SAP mapping expert. I will provide you with a JSON array containing multiple Source System fields, each with a unique 'row_idx'.
-For each item, predict UP TO 3 corresponding SAP Table Names and Field Names, ranked by your confidence level.
+    sys_prompt = """You are an elite SAP Data Migration and Integration Expert. I will provide you with a JSON array containing custom/source system fields, each with a unique 'row_idx'.
+For each item, predict EXACTLY 3 corresponding standard SAP Table Names and Field Names (e.g., MARA/MATNR, VBAK/VBELN), ranked by your confidence level from highest to lowest.
+
+RULES FOR ACCURACY:
+1. Strongly bias towards standard SAP Modules (SD, MM, FI, CO, PP, etc.) and their primary tables.
+2. If the source field indicates a primary key (e.g., Order No, Material No), map it to the header/item table keys.
+3. If the source field description is Japanese/Chinese, use your multilingual SAP dictionary knowledge to find the exact German/English abbreviation for the SAP field.
+
 Your response MUST be a VALID JSON ARRAY.
 Do not wrap it in markdown block quotes (do not use ```json), just output the raw JSON array.
 Each object in the array MUST contain:
 - "row_idx": (must match exactly the row_idx provided)
-- "candidates": A JSON array containing 1 to 3 objects, sorted from highest confidence to lowest. 
+- "candidates": A JSON array containing exactly 1 to 3 objects, sorted from highest confidence to lowest. 
 Each candidate object MUST contain:
    - "sap_table_name"
    - "sap_field_name"
@@ -39,44 +46,50 @@ Each candidate object MUST contain:
    - "score" (a float between 0.01 and 0.99 indicating confidence)
 If you cannot find any mappings, return an empty array for "candidates"."""
 
-    # 只丢进模型需要推理的有效干货以减少 Token 消耗
-    payload = [{"row_idx": item["row_idx"], "src_field": item["src_field"], "src_desc": item["src_desc"]} for item in unmatched_items]
-    user_prompt = f"Batch payload: {json.dumps(payload, ensure_ascii=False)}"
+    result_map = {}
+    chunk_size = 50  # 进一步增加批量大小以减少 HTTP 请求次数
+    total_chunks = (len(unmatched_items) + chunk_size - 1) // chunk_size
 
-    try:
-        response = dashscope.Generation.call(
-            model='qwen-plus',
-            messages=[
-                {'role': 'system', 'content': sys_prompt},
-                {'role': 'user', 'content': user_prompt}
-            ],
-            result_format='message'
-        )
+    def fetch_chunk(chunk_index, chunk_data):
+        payload = [{"row_idx": item["row_idx"], "src_field": item["src_field"], "src_desc": item["src_desc"]} for item in chunk_data]
+        user_prompt = f"Batch payload: {json.dumps(payload, ensure_ascii=False)}"
+        logger.info(f"AIモデル（Qwen）にバッチを送信中... ({chunk_index + 1}/{total_chunks} 番目のバッチ, {len(chunk_data)}件)")
 
-        if response.status_code == 200:
-            content = response.output.choices[0]['message']['content']
-            
-            # 清理模型的 Markdown 输出癖好
-            if "```json" in content:
-                content = content.split("```json")[-1].split("```")[0].strip()
-            elif "```" in content:
-                content = content.split("```")[-1].split("```")[0].strip()
+        try:
+            response = dashscope.Generation.call(
+                model='qwen-max',  # Upgraded to qwen-max for highly accurate SAP semantics
+                messages=[
+                    {'role': 'system', 'content': sys_prompt},
+                    {'role': 'user', 'content': user_prompt}
+                ],
+                result_format='message'
+            )
+
+            if response.status_code == 200:
+                content = response.output.choices[0]['message']['content']
+                if "```json" in content:
+                    content = content.split("```json")[-1].split("```")[0].strip()
+                elif "```" in content:
+                    content = content.split("```")[-1].split("```")[0].strip()
+                    
+                return json.loads(content)
+            else:
+                logger.error(f"AIモデルバッチAPIの呼び出しに失敗しました: {response.code} {response.message}")
+                return []
                 
-            predictions = json.loads(content)
-            
-            # 整理成字典以供 O(1) 快速查询回填: {row_idx: [ { sap_... }, { sap_... } ], row_idx2: [ ... ]}
-            result_map = {}
+        except Exception as llm_e:
+            logger.warning(f"AIモデル処理でエラーが発生しました（バッチ {chunk_index + 1}）。この部分は放棄します: {llm_e}")
+            return []
+
+    # Use ThreadPoolExecutor for concurrent requests
+    chunks = [unmatched_items[i:i + chunk_size] for i in range(0, len(unmatched_items), chunk_size)]
+    with concurrent.futures.ThreadPoolExecutor(max_workers=8) as executor:  # 增加并发数
+        futures = {executor.submit(fetch_chunk, idx, chunk): idx for idx, chunk in enumerate(chunks)}
+        for future in concurrent.futures.as_completed(futures):
+            predictions = future.result()
             for pred in predictions:
                 idx = pred.get("row_idx")
                 if idx is not None:
-                    # 获取最多3个候选结果并原样传出
-                    candidates = pred.get("candidates", [])
-                    result_map[idx] = candidates
-            return result_map
-        else:
-            logger.error(f"AIモデルバッチAPIの呼び出しに失敗しました: {response.code} {response.message}")
-            return {}
-            
-    except Exception as llm_e:
-        logger.warning(f"AIモデルのフォールバック処理で致命的なエラーが発生しました。このバッチは放棄します: {llm_e}\nOutput was: {content if 'content' in locals() else 'None'}")
-        return {}
+                    result_map[idx] = pred.get("candidates", [])
+
+    return result_map

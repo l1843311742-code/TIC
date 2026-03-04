@@ -41,6 +41,9 @@ def map_columns(ws, renkei_moto_cell, renkei_saki_cell):
     col_src_desc, col_src_field, col_src_table = None, None, None
     col_sap_desc, col_sap_table, col_sap_field = None, None, None
 
+    moto_col = renkei_moto_cell.column
+    saki_col = renkei_saki_cell.column
+
     # 循环我们找好的小标题行
     for cell in ws[header_row]:
         val = str(cell.value).strip().replace(" ", "").replace("　", "") if cell.value is not None else ""
@@ -49,8 +52,15 @@ def map_columns(ws, renkei_moto_cell, renkei_saki_cell):
             
         col_idx = cell.column  # 获取这是第几列 (比如 A=1, B=2)
         
-        # 判断界限：属于“左半边源系统区”
-        if renkei_moto_cell.column <= col_idx < renkei_saki_cell.column:
+        # 兼容左右位置互换的情况：判断当前列属于源系统区 (moto) 还是 目标系统区 (saki)
+        if moto_col < saki_col:
+            is_moto = moto_col <= col_idx < saki_col
+            is_saki = col_idx >= saki_col
+        else:
+            is_saki = saki_col <= col_idx < moto_col
+            is_moto = col_idx >= moto_col
+            
+        if is_moto:
             # 宽容匹配中文和日文，记录对应的列号
             if val == "项目名称" or val == "項目名称":
                 col_src_desc = col_idx
@@ -59,8 +69,7 @@ def map_columns(ws, renkei_moto_cell, renkei_saki_cell):
             elif val in ("构造", "構造", "テーブル", "表名"):
                 col_src_table = col_idx
                 
-        # 判断界限：属于“右半边 SAP系统区”
-        elif col_idx >= renkei_saki_cell.column:
+        elif is_saki:
             if val == "项目名称" or val == "項目名称":
                 col_sap_desc = col_idx
             elif val == "构造" or val == "構造" or val in ("テーブル", "表名"):
@@ -68,5 +77,5 @@ def map_columns(ws, renkei_moto_cell, renkei_saki_cell):
             elif val == "技术名称" or val == "技術名称":
                 col_sap_field = col_idx
                 
-    # 把找了一圈最后确定的 7 个核心坐标打包送给外层的代码
-    return header_row, col_src_desc, col_src_field, col_src_table, col_sap_desc, col_sap_table, col_sap_field
+    # 把找了一圈最后确定的 7 个核心坐标打包送给外层的代码 (新增返回这两个 cell 锚点)
+    return header_row, renkei_moto_cell, renkei_saki_cell, col_src_desc, col_src_field, col_src_table, col_sap_desc, col_sap_table, col_sap_field

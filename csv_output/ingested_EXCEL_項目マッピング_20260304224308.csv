@@ -1,0 +1,80 @@
+﻿id,text,source_system_name,source_table_name,source_field_name,source_field_desc,sap_table_name,sap_field_name,sap_field_desc
+mapping_D:\antigravity\TIC\EXCEL\091_IFZ9000120(管理番号10126)_インタフェース項目定義書_国内出荷指示送信データ（積送）_R0.81.xlsx_10_forward,[source_system:部品SAP] [source_table:MATDOC] [source_field:WERKS] [source_description:プラント],部品SAP,MATDOC,WERKS,プラント,RJ071,BTKU,得意先コード
+mapping_D:\antigravity\TIC\EXCEL\091_IFZ9000120(管理番号10126)_インタフェース項目定義書_国内出荷指示送信データ（積送）_R0.81.xlsx_10_backward,[source_system:倉庫システム] [source_table:RJ071] [source_field:BTKU] [source_description:得意先コード],倉庫システム,RJ071,BTKU,得意先コード,MATDOC,WERKS,プラント
+mapping_D:\antigravity\TIC\EXCEL\091_IFZ9000120(管理番号10126)_インタフェース項目定義書_国内出荷指示送信データ（積送）_R0.81.xlsx_12_forward,[source_system:部品SAP] [source_table:MATDOC] [source_field:BLDAT] [source_description:伝票の伝票日付],部品SAP,MATDOC,BLDAT,伝票の伝票日付,RJ071,DUKEYMD,受付日
+mapping_D:\antigravity\TIC\EXCEL\091_IFZ9000120(管理番号10126)_インタフェース項目定義書_国内出荷指示送信データ（積送）_R0.81.xlsx_12_backward,[source_system:倉庫システム] [source_table:RJ071] [source_field:DUKEYMD] [source_description:受付日],倉庫システム,RJ071,DUKEYMD,受付日,MATDOC,BLDAT,伝票の伝票日付
+mapping_D:\antigravity\TIC\EXCEL\091_IFZ9000120(管理番号10126)_インタフェース項目定義書_国内出荷指示送信データ（積送）_R0.81.xlsx_14_forward,[source_system:部品SAP] [source_table:KNA1] [source_field:REGIO] [source_description:地域 (都道府県)],部品SAP,KNA1,REGIO,地域 (都道府県),RJ071,BFUK,府県コード
+mapping_D:\antigravity\TIC\EXCEL\091_IFZ9000120(管理番号10126)_インタフェース項目定義書_国内出荷指示送信データ（積送）_R0.81.xlsx_14_backward,[source_system:倉庫システム] [source_table:RJ071] [source_field:BFUK] [source_description:府県コード],倉庫システム,RJ071,BFUK,府県コード,KNA1,REGIO,地域 (都道府県)
+mapping_D:\antigravity\TIC\EXCEL\091_IFZ9000120(管理番号10126)_インタフェース項目定義書_国内出荷指示送信データ（積送）_R0.81.xlsx_15_forward,[source_system:部品SAP] [source_table:MATDOC] [source_field:WERKS] [source_description:プラント],部品SAP,MATDOC,WERKS,プラント,RJ071,BNOS,納所コード
+mapping_D:\antigravity\TIC\EXCEL\091_IFZ9000120(管理番号10126)_インタフェース項目定義書_国内出荷指示送信データ（積送）_R0.81.xlsx_15_backward,[source_system:倉庫システム] [source_table:RJ071] [source_field:BNOS] [source_description:納所コード],倉庫システム,RJ071,BNOS,納所コード,MATDOC,WERKS,プラント
+mapping_D:\antigravity\TIC\EXCEL\091_IFZ9000120(管理番号10126)_インタフェース項目定義書_国内出荷指示送信データ（積送）_R0.81.xlsx_16_forward,"[source_system:部品SAP] [source_table:ADRC
+ADRC] [source_field:NAME1
+NAME2] [source_description:名称1＋名称2
+(国際バージョン：カナ)]",部品SAP,"ADRC
+ADRC","NAME1
+NAME2","名称1＋名称2
+(国際バージョン：カナ)",RJ071,NNOS,納所名
+mapping_D:\antigravity\TIC\EXCEL\091_IFZ9000120(管理番号10126)_インタフェース項目定義書_国内出荷指示送信データ（積送）_R0.81.xlsx_16_backward,[source_system:倉庫システム] [source_table:RJ071] [source_field:NNOS] [source_description:納所名],倉庫システム,RJ071,NNOS,納所名,"ADRC
+ADRC","NAME1
+NAME2","名称1＋名称2
+(国際バージョン：カナ)"
+mapping_D:\antigravity\TIC\EXCEL\091_IFZ9000120(管理番号10126)_インタフェース項目定義書_国内出荷指示送信データ（積送）_R0.81.xlsx_17_forward,"[source_system:部品SAP] [source_table:ADRC
+ADRC] [source_field:CITY1
+STREET] [source_description:都道府県＋市区町村
+(国際バージョン：カナ)]",部品SAP,"ADRC
+ADRC","CITY1
+STREET","都道府県＋市区町村
+(国際バージョン：カナ)",RJ071,JNOS,納所住所
+mapping_D:\antigravity\TIC\EXCEL\091_IFZ9000120(管理番号10126)_インタフェース項目定義書_国内出荷指示送信データ（積送）_R0.81.xlsx_17_backward,[source_system:倉庫システム] [source_table:RJ071] [source_field:JNOS] [source_description:納所住所],倉庫システム,RJ071,JNOS,納所住所,"ADRC
+ADRC","CITY1
+STREET","都道府県＋市区町村
+(国際バージョン：カナ)"
+mapping_D:\antigravity\TIC\EXCEL\091_IFZ9000120(管理番号10126)_インタフェース項目定義書_国内出荷指示送信データ（積送）_R0.81.xlsx_23_forward,"[source_system:部品SAP] [source_table:ADRC
+ADRC] [source_field:NAME1
+NAME2] [source_description:名称1＋名称2
+(国際バージョン：カナ)]",部品SAP,"ADRC
+ADRC","NAME1
+NAME2","名称1＋名称2
+(国際バージョン：カナ)",RJ071,NTKUKN,得意先名
+mapping_D:\antigravity\TIC\EXCEL\091_IFZ9000120(管理番号10126)_インタフェース項目定義書_国内出荷指示送信データ（積送）_R0.81.xlsx_23_backward,[source_system:倉庫システム] [source_table:RJ071] [source_field:NTKUKN] [source_description:得意先名],倉庫システム,RJ071,NTKUKN,得意先名,"ADRC
+ADRC","NAME1
+NAME2","名称1＋名称2
+(国際バージョン：カナ)"
+mapping_D:\antigravity\TIC\EXCEL\091_IFZ9000120(管理番号10126)_インタフェース項目定義書_国内出荷指示送信データ（積送）_R0.81.xlsx_24_forward,[source_system:部品SAP] [source_table:MATDOC] [source_field:BLDAT] [source_description:伝票の伝票日付],部品SAP,MATDOC,BLDAT,伝票の伝票日付,RJ071,DDTASSI,データ作成日
+mapping_D:\antigravity\TIC\EXCEL\091_IFZ9000120(管理番号10126)_インタフェース項目定義書_国内出荷指示送信データ（積送）_R0.81.xlsx_24_backward,[source_system:倉庫システム] [source_table:RJ071] [source_field:DDTASSI] [source_description:データ作成日],倉庫システム,RJ071,DDTASSI,データ作成日,MATDOC,BLDAT,伝票の伝票日付
+mapping_D:\antigravity\TIC\EXCEL\091_IFZ9000120(管理番号10126)_インタフェース項目定義書_国内出荷指示送信データ（積送）_R0.81.xlsx_44_forward,[source_system:部品SAP] [source_table:MATDOC] [source_field:MATNR] [source_description:品目コード],部品SAP,MATDOC,MATNR,品目コード,RJ071,BKSAHIN,検索品番
+mapping_D:\antigravity\TIC\EXCEL\091_IFZ9000120(管理番号10126)_インタフェース項目定義書_国内出荷指示送信データ（積送）_R0.81.xlsx_44_backward,[source_system:倉庫システム] [source_table:RJ071] [source_field:BKSAHIN] [source_description:検索品番],倉庫システム,RJ071,BKSAHIN,検索品番,MATDOC,MATNR,品目コード
+mapping_D:\antigravity\TIC\EXCEL\091_IFZ9000120(管理番号10126)_インタフェース項目定義書_国内出荷指示送信データ（積送）_R0.81.xlsx_46_forward,[source_system:部品SAP] [source_table:MAKT] [source_field:MAKTX] [source_description:品目テキスト],部品SAP,MAKT,MAKTX,品目テキスト,RJ071,NHINKN,品名
+mapping_D:\antigravity\TIC\EXCEL\091_IFZ9000120(管理番号10126)_インタフェース項目定義書_国内出荷指示送信データ（積送）_R0.81.xlsx_46_backward,[source_system:倉庫システム] [source_table:RJ071] [source_field:NHINKN] [source_description:品名],倉庫システム,RJ071,NHINKN,品名,MAKT,MAKTX,品目テキスト
+mapping_D:\antigravity\TIC\EXCEL\091_IFZ9000120(管理番号10126)_インタフェース項目定義書_国内出荷指示送信データ（積送）_R0.81.xlsx_55_forward,[source_system:部品SAP] [source_table:MVKE] [source_field:MVGR1] [source_description:品目グループ 1],部品SAP,MVKE,MVGR1,品目グループ 1,RJ071,BKMO,科目
+mapping_D:\antigravity\TIC\EXCEL\091_IFZ9000120(管理番号10126)_インタフェース項目定義書_国内出荷指示送信データ（積送）_R0.81.xlsx_55_backward,[source_system:倉庫システム] [source_table:RJ071] [source_field:BKMO] [source_description:科目],倉庫システム,RJ071,BKMO,科目,MVKE,MVGR1,品目グループ 1
+mapping_D:\antigravity\TIC\EXCEL\091_IFZ9000120(管理番号10126)_インタフェース項目定義書_国内出荷指示送信データ（積送）_R0.81.xlsx_56_forward,[source_system:部品SAP] [source_table:MARA] [source_field:PRDHA] [source_description:品目階層],部品SAP,MARA,PRDHA,品目階層,RJ071,BSMLKIS,小機種
+mapping_D:\antigravity\TIC\EXCEL\091_IFZ9000120(管理番号10126)_インタフェース項目定義書_国内出荷指示送信データ（積送）_R0.81.xlsx_56_backward,[source_system:倉庫システム] [source_table:RJ071] [source_field:BSMLKIS] [source_description:小機種],倉庫システム,RJ071,BSMLKIS,小機種,MARA,PRDHA,品目階層
+mapping_D:\antigravity\TIC\EXCEL\091_IFZ9000120(管理番号10126)_インタフェース項目定義書_国内出荷指示送信データ（積送）_R0.81.xlsx_57_forward,[source_system:部品SAP] [source_table:MARA] [source_field:PRDHA] [source_description:品目階層],部品SAP,MARA,PRDHA,品目階層,RJ071,BMIDKIS,中機種
+mapping_D:\antigravity\TIC\EXCEL\091_IFZ9000120(管理番号10126)_インタフェース項目定義書_国内出荷指示送信データ（積送）_R0.81.xlsx_57_backward,[source_system:倉庫システム] [source_table:RJ071] [source_field:BMIDKIS] [source_description:中機種],倉庫システム,RJ071,BMIDKIS,中機種,MARA,PRDHA,品目階層
+mapping_D:\antigravity\TIC\EXCEL\091_IFZ9000120(管理番号10126)_インタフェース項目定義書_国内出荷指示送信データ（積送）_R0.81.xlsx_58_forward,[source_system:部品SAP] [source_table:MARA] [source_field:PRDHA] [source_description:品目階層],部品SAP,MARA,PRDHA,品目階層,RJ071,BLAGKIS,大機種
+mapping_D:\antigravity\TIC\EXCEL\091_IFZ9000120(管理番号10126)_インタフェース項目定義書_国内出荷指示送信データ（積送）_R0.81.xlsx_58_backward,[source_system:倉庫システム] [source_table:RJ071] [source_field:BLAGKIS] [source_description:大機種],倉庫システム,RJ071,BLAGKIS,大機種,MARA,PRDHA,品目階層
+mapping_D:\antigravity\TIC\EXCEL\091_IFZ9000120(管理番号10126)_インタフェース項目定義書_国内出荷指示送信データ（積送）_R0.81.xlsx_59_forward,[source_system:部品SAP] [source_table:MARA] [source_field:SPART] [source_description:製品部門],部品SAP,MARA,SPART,製品部門,RJ071,BKOJ,工場区分
+mapping_D:\antigravity\TIC\EXCEL\091_IFZ9000120(管理番号10126)_インタフェース項目定義書_国内出荷指示送信データ（積送）_R0.81.xlsx_59_backward,[source_system:倉庫システム] [source_table:RJ071] [source_field:BKOJ] [source_description:工場区分],倉庫システム,RJ071,BKOJ,工場区分,MARA,SPART,製品部門
+mapping_D:\antigravity\TIC\EXCEL\091_IFZ9000120(管理番号10126)_インタフェース項目定義書_国内出荷指示送信データ（積送）_R0.81.xlsx_60_forward,[source_system:部品SAP] [source_table:MVKE] [source_field:MVGR3] [source_description:品目グループ３],部品SAP,MVKE,MVGR3,品目グループ３,RJ071,BATKPC,扱いＰＣ
+mapping_D:\antigravity\TIC\EXCEL\091_IFZ9000120(管理番号10126)_インタフェース項目定義書_国内出荷指示送信データ（積送）_R0.81.xlsx_60_backward,[source_system:倉庫システム] [source_table:RJ071] [source_field:BATKPC] [source_description:扱いＰＣ],倉庫システム,RJ071,BATKPC,扱いＰＣ,MVKE,MVGR3,品目グループ３
+mapping_D:\antigravity\TIC\EXCEL\091_IFZ9000120(管理番号10126)_インタフェース項目定義書_国内出荷指示送信データ（積送）_R0.81.xlsx_61_forward,[source_system:部品SAP] [source_table:MVKE] [source_field:MTPOS] [source_description:品目マスタの明細カテゴリグループ],部品SAP,MVKE,MTPOS,品目マスタの明細カテゴリグループ,RJ071,CSEH,製品区分
+mapping_D:\antigravity\TIC\EXCEL\091_IFZ9000120(管理番号10126)_インタフェース項目定義書_国内出荷指示送信データ（積送）_R0.81.xlsx_61_backward,[source_system:倉庫システム] [source_table:RJ071] [source_field:CSEH] [source_description:製品区分],倉庫システム,RJ071,CSEH,製品区分,MVKE,MTPOS,品目マスタの明細カテゴリグループ
+mapping_D:\antigravity\TIC\EXCEL\091_IFZ9000120(管理番号10126)_インタフェース項目定義書_国内出荷指示送信データ（積送）_R0.81.xlsx_64_forward,[source_system:部品SAP] [source_table:MARC] [source_field:MAABC] [source_description:ABC区分],部品SAP,MARC,MAABC,ABC区分,RJ071,CKAN,管理区分
+mapping_D:\antigravity\TIC\EXCEL\091_IFZ9000120(管理番号10126)_インタフェース項目定義書_国内出荷指示送信データ（積送）_R0.81.xlsx_64_backward,[source_system:倉庫システム] [source_table:RJ071] [source_field:CKAN] [source_description:管理区分],倉庫システム,RJ071,CKAN,管理区分,MARC,MAABC,ABC区分
+mapping_D:\antigravity\TIC\EXCEL\091_IFZ9000120(管理番号10126)_インタフェース項目定義書_国内出荷指示送信データ（積送）_R0.81.xlsx_65_forward,[source_system:部品SAP] [source_table:MARA] [source_field:NTGEW] [source_description:単体重量],部品SAP,MARA,NTGEW,単体重量,RJ071,SSYMGYU,正味重量
+mapping_D:\antigravity\TIC\EXCEL\091_IFZ9000120(管理番号10126)_インタフェース項目定義書_国内出荷指示送信データ（積送）_R0.81.xlsx_65_backward,[source_system:倉庫システム] [source_table:RJ071] [source_field:SSYMGYU] [source_description:正味重量],倉庫システム,RJ071,SSYMGYU,正味重量,MARA,NTGEW,単体重量
+mapping_D:\antigravity\TIC\EXCEL\091_IFZ9000120(管理番号10126)_インタフェース項目定義書_国内出荷指示送信データ（積送）_R0.81.xlsx_80_forward,[source_system:部品SAP] [source_table:MATDOC] [source_field:WERKS] [source_description:プラント],部品SAP,MATDOC,WERKS,プラント,RJ071,CHKASOKOYA,引当倉庫・親倉庫
+mapping_D:\antigravity\TIC\EXCEL\091_IFZ9000120(管理番号10126)_インタフェース項目定義書_国内出荷指示送信データ（積送）_R0.81.xlsx_80_backward,[source_system:倉庫システム] [source_table:RJ071] [source_field:CHKASOKOYA] [source_description:引当倉庫・親倉庫],倉庫システム,RJ071,CHKASOKOYA,引当倉庫・親倉庫,MATDOC,WERKS,プラント
+mapping_D:\antigravity\TIC\EXCEL\091_IFZ9000120(管理番号10126)_インタフェース項目定義書_国内出荷指示送信データ（積送）_R0.81.xlsx_84_forward,[source_system:部品SAP] [source_table:MATDOC] [source_field:BLDAT] [source_description:伝票の伝票日付],部品SAP,MATDOC,BLDAT,伝票の伝票日付,RJ071,DSYJ,出荷指示日
+mapping_D:\antigravity\TIC\EXCEL\091_IFZ9000120(管理番号10126)_インタフェース項目定義書_国内出荷指示送信データ（積送）_R0.81.xlsx_84_backward,[source_system:倉庫システム] [source_table:RJ071] [source_field:DSYJ] [source_description:出荷指示日],倉庫システム,RJ071,DSYJ,出荷指示日,MATDOC,BLDAT,伝票の伝票日付
+mapping_D:\antigravity\TIC\EXCEL\091_IFZ9000120(管理番号10126)_インタフェース項目定義書_国内出荷指示送信データ（積送）_R0.81.xlsx_85_forward,[source_system:部品SAP] [source_table:MATDOC] [source_field:BLDAT] [source_description:伝票の伝票日付],部品SAP,MATDOC,BLDAT,伝票の伝票日付,RJ071,DJTUSYK,実出荷日
+mapping_D:\antigravity\TIC\EXCEL\091_IFZ9000120(管理番号10126)_インタフェース項目定義書_国内出荷指示送信データ（積送）_R0.81.xlsx_85_backward,[source_system:倉庫システム] [source_table:RJ071] [source_field:DJTUSYK] [source_description:実出荷日],倉庫システム,RJ071,DJTUSYK,実出荷日,MATDOC,BLDAT,伝票の伝票日付
+mapping_D:\antigravity\TIC\EXCEL\091_IFZ9000120(管理番号10126)_インタフェース項目定義書_国内出荷指示送信データ（積送）_R0.81.xlsx_91_forward,[source_system:部品SAP] [source_table:MVKE] [source_field:MVGR1] [source_description:品目グループ 1],部品SAP,MVKE,MVGR1,品目グループ 1,RJ071,BKMOCOD,科目コード
+mapping_D:\antigravity\TIC\EXCEL\091_IFZ9000120(管理番号10126)_インタフェース項目定義書_国内出荷指示送信データ（積送）_R0.81.xlsx_91_backward,[source_system:倉庫システム] [source_table:RJ071] [source_field:BKMOCOD] [source_description:科目コード],倉庫システム,RJ071,BKMOCOD,科目コード,MVKE,MVGR1,品目グループ 1
+mapping_D:\antigravity\TIC\EXCEL\091_IFZ9000120(管理番号10126)_インタフェース項目定義書_国内出荷指示送信データ（積送）_R0.81.xlsx_96_forward,[source_system:部品SAP] [source_table:MATDOC] [source_field:ZEILE] [source_description:入出庫伝票の明細],部品SAP,MATDOC,ZEILE,入出庫伝票の明細,RJ071,BSYRGYO,出荷ライン№
+mapping_D:\antigravity\TIC\EXCEL\091_IFZ9000120(管理番号10126)_インタフェース項目定義書_国内出荷指示送信データ（積送）_R0.81.xlsx_96_backward,[source_system:倉庫システム] [source_table:RJ071] [source_field:BSYRGYO] [source_description:出荷ライン№],倉庫システム,RJ071,BSYRGYO,出荷ライン№,MATDOC,ZEILE,入出庫伝票の明細
+mapping_D:\antigravity\TIC\EXCEL\091_IFZ9000120(管理番号10126)_インタフェース項目定義書_国内出荷指示送信データ（積送）_R0.81.xlsx_97_forward,[source_system:部品SAP] [source_table:MATDOC] [source_field:MENGE] [source_description:数量],部品SAP,MATDOC,MENGE,数量,RJ071,SSYJ,出荷指示数
+mapping_D:\antigravity\TIC\EXCEL\091_IFZ9000120(管理番号10126)_インタフェース項目定義書_国内出荷指示送信データ（積送）_R0.81.xlsx_97_backward,[source_system:倉庫システム] [source_table:RJ071] [source_field:SSYJ] [source_description:出荷指示数],倉庫システム,RJ071,SSYJ,出荷指示数,MATDOC,MENGE,数量
+mapping_D:\antigravity\TIC\EXCEL\091_IFZ9000120(管理番号10126)_インタフェース項目定義書_国内出荷指示送信データ（積送）_R0.81.xlsx_98_forward,[source_system:部品SAP] [source_table:MATDOC] [source_field:MENGE] [source_description:数量],部品SAP,MATDOC,MENGE,数量,RJ071,SJTUSYK,実出荷数
+mapping_D:\antigravity\TIC\EXCEL\091_IFZ9000120(管理番号10126)_インタフェース項目定義書_国内出荷指示送信データ（積送）_R0.81.xlsx_98_backward,[source_system:倉庫システム] [source_table:RJ071] [source_field:SJTUSYK] [source_description:実出荷数],倉庫システム,RJ071,SJTUSYK,実出荷数,MATDOC,MENGE,数量
