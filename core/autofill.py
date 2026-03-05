@@ -190,14 +190,25 @@ def auto_fill_excel(file_path: str, sheet_name: str, db_path: str, collection_na
              
              for i, c in enumerate(vector_candidates):
                  if v_results['ids'] and v_results['ids'][i]:
+                     # 记录所有候选项的距离值，用于诊断
+                     logger.debug(f"行 {c['row_idx']} [{c['doc_text'][:50]}...] 的向量候选:")
+                     for j in range(len(v_results['ids'][i])):
+                         meta = v_results['metadatas'][i][j]
+                         dist = v_results['distances'][i][j]
+                         logger.debug(f"  距离={dist:.4f} | {meta.get('sap_table_name','')}.{meta.get('sap_field_name','')} | {meta.get('sap_field_desc','')[:30]}")
+                     
                      valid_matches = []
                      for j in range(len(v_results['ids'][i])):
                          distance = v_results['distances'][i][j]
                          # 必须把误差卡死在 0.10，否则像“物料”会因为和“移动类型”在数据库里余弦角度差 0.12 而被当成近义词！宁缺毋滥，把不靠谱的交给大模型。
-                         if distance < 0.10: 
+                         if distance < 0.08: 
                              valid_matches.append((distance, v_results['metadatas'][i][j]))
                      
                      if valid_matches: 
+                         # 先按距离排序（从小到大，距离越小越相似）
+                         valid_matches.sort(key=lambda x: x[0])
+                         
+                         # 按字段名去重，保留匹配度最高的3个不同字段名
                          seen_fields = set()
                          tables = []
                          fields = []
@@ -209,8 +220,9 @@ def auto_fill_excel(file_path: str, sheet_name: str, db_path: str, collection_na
                                  tables.append(m.get('sap_table_name', ''))
                                  fields.append(field)
                                  descs.append(m.get('sap_field_desc', ''))
-                             if len(fields) >= 3:
-                                 break
+                                 # 达到3个就停止
+                                 if len(fields) >= 3:
+                                     break
                          
                          target_col_table = col_sap_table if c["direction"] == "moto_to_saki" else col_src_table
                          target_col_field = col_sap_field if c["direction"] == "moto_to_saki" else col_src_field
@@ -232,7 +244,7 @@ def auto_fill_excel(file_path: str, sheet_name: str, db_path: str, collection_na
                          ws.cell(row=c["row_idx"], column=col_match_source).value = 'ベクトル'
                          
                          filled_count += 1
-                         logger.info(f"Vector Match (レベルB) ヒット {len(valid_matches)} 件: 第一候補 {c['src_field']} -> {valid_matches[0][1].get('sap_table_name')}.{valid_matches[0][1].get('sap_field_name')} ({c['direction']})")
+                         logger.info(f"Vector Match (レベルB) ヒット {len(fields)} 件: 第一候補 {c['src_field']} -> {valid_matches[0][1].get('sap_table_name')}.{valid_matches[0][1].get('sap_field_name')} ({c['direction']})")
                      else:
                          unmatched_for_llm.append(c)
                  else:
@@ -265,6 +277,7 @@ def auto_fill_excel(file_path: str, sheet_name: str, db_path: str, collection_na
             candidates = batch_results.get(r_idx, [])
             
             if candidates and isinstance(candidates, list) and len(candidates) > 0:
+                # 按字段名去重，保留前3个不同的字段名（LLM已按score排序）
                 seen_fields = set()
                 tables = []
                 fields = []
@@ -276,8 +289,9 @@ def auto_fill_excel(file_path: str, sheet_name: str, db_path: str, collection_na
                         tables.append(c_item.get('sap_table_name', ''))
                         fields.append(field)
                         descs.append(c_item.get('sap_field_desc', ''))
-                    if len(fields) >= 3:
-                        break
+                        # 达到3个就停止
+                        if len(fields) >= 3:
+                            break
                 
                 target_col_table = col_sap_table if item["direction"] == "moto_to_saki" else col_src_table
                 target_col_field = col_sap_field if item["direction"] == "moto_to_saki" else col_src_field
@@ -299,7 +313,7 @@ def auto_fill_excel(file_path: str, sheet_name: str, db_path: str, collection_na
                 ws.cell(row=r_idx, column=col_match_source).value = 'AIモデル'
 
                 filled_count += 1
-                logger.info(f"LLM バッチ補完成功: 行 {r_idx} で {len(candidates)} 件の候補結果を提供しました。({item['direction']})")
+                logger.info(f"LLM バッチ補完成功: 行 {r_idx} で {len(fields)} 件の候補結果を提供しました。({item['direction']})")
             else:
                 ws.cell(row=r_idx, column=col_match_source).value = '未匹配'
                 logger.info(f"AIモデルも行 {r_idx} '{item['src_field']}' を推論できませんでした。完全放棄！")

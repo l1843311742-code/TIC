@@ -47,23 +47,33 @@ Each candidate object MUST contain:
 If you cannot find any mappings, return an empty array for "candidates"."""
 
     result_map = {}
-    chunk_size = 50  # 进一步增加批量大小以减少 HTTP 请求次数
+    chunk_size = 5  # 每个批次5个字段，避免单次请求过大导致超时
     total_chunks = (len(unmatched_items) + chunk_size - 1) // chunk_size
+    
+    logger.info(f"AIモデル処理開始: 合計 {len(unmatched_items)} 件を {total_chunks} バッチに分割（各バッチ最大{chunk_size}件）")
 
     def fetch_chunk(chunk_index, chunk_data):
+        """单个批次的API调用"""
         payload = [{"row_idx": item["row_idx"], "src_field": item["src_field"], "src_desc": item["src_desc"]} for item in chunk_data]
         user_prompt = f"Batch payload: {json.dumps(payload, ensure_ascii=False)}"
-        logger.info(f"AIモデル（Qwen）にバッチを送信中... ({chunk_index + 1}/{total_chunks} 番目のバッチ, {len(chunk_data)}件)")
+        
+        logger.info(f"📤 バッチ {chunk_index + 1}/{total_chunks} 送信中 ({len(chunk_data)}件)...")
 
         try:
+            import time
+            start_time = time.time()
+            
             response = dashscope.Generation.call(
-                model='qwen-max',  # Upgraded to qwen-max for highly accurate SAP semantics
+                model='qwen-max',
                 messages=[
                     {'role': 'system', 'content': sys_prompt},
                     {'role': 'user', 'content': user_prompt}
                 ],
-                result_format='message'
+                result_format='message',
+                timeout=120  # 120秒超时
             )
+            
+            elapsed = time.time() - start_time
 
             if response.status_code == 200:
                 content = response.output.choices[0]['message']['content']
@@ -71,25 +81,43 @@ If you cannot find any mappings, return an empty array for "candidates"."""
                     content = content.split("```json")[-1].split("```")[0].strip()
                 elif "```" in content:
                     content = content.split("```")[-1].split("```")[0].strip()
-                    
-                return json.loads(content)
+                
+                result = json.loads(content)
+                logger.info(f"✅ バッチ {chunk_index + 1}/{total_chunks} 完了 (耗时: {elapsed:.2f}秒, {len(result)}件返回)")
+                return result
             else:
-                logger.error(f"AIモデルバッチAPIの呼び出しに失敗しました: {response.code} {response.message}")
+                logger.error(f"❌ バッチ {chunk_index + 1} 失敗: {response.code} {response.message}")
                 return []
                 
         except Exception as llm_e:
-            logger.warning(f"AIモデル処理でエラーが発生しました（バッチ {chunk_index + 1}）。この部分は放棄します: {llm_e}")
+            logger.warning(f"⚠️  バッチ {chunk_index + 1} エラー: {llm_e}")
             return []
 
-    # Use ThreadPoolExecutor for concurrent requests
+    # 使用线程池并发调用API（IO密集型任务适合多线程）
     chunks = [unmatched_items[i:i + chunk_size] for i in range(0, len(unmatched_items), chunk_size)]
-    with concurrent.futures.ThreadPoolExecutor(max_workers=8) as executor:  # 增加并发数
+    
+    # 并发数设置：5个线程同时调用API
+    max_workers = 5
+    logger.info(f"🚀 {max_workers}個の並列スレッドでAPI呼び出しを開始...")
+    
+    with concurrent.futures.ThreadPoolExecutor(max_workers=max_workers) as executor:
+        # 提交所有任务
         futures = {executor.submit(fetch_chunk, idx, chunk): idx for idx, chunk in enumerate(chunks)}
+        
+        # 等待完成并收集结果
+        completed = 0
         for future in concurrent.futures.as_completed(futures):
+            completed += 1
             predictions = future.result()
+            
+            # 处理返回的结果
             for pred in predictions:
                 idx = pred.get("row_idx")
                 if idx is not None:
                     result_map[idx] = pred.get("candidates", [])
-
+            
+            # 显示总体进度
+            logger.info(f"📊 進捗: {completed}/{total_chunks} バッチ完了 ({completed*100//total_chunks}%)")
+    
+    logger.info(f"✨ AIモデル処理完了: {len(result_map)} 件の結果を取得")
     return result_map

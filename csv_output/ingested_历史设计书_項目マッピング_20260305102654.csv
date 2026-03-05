@@ -1,0 +1,220 @@
+﻿id,text,source_system_name,source_table_name,source_field_name,source_field_desc,sap_table_name,sap_field_name,sap_field_desc
+mapping_D:\antigravity\TIC\EXCEL\历史设计书\091_IFZ9000105(管理番号10112)_インタフェース項目定義書_国内出荷連絡データ_R0.81.xlsx_8_forward,[source_system:倉庫システム] [source_table:] [source_field:DSYKDDD] [source_description:出荷日],倉庫システム,,DSYKDDD,出荷日,LIKP,WADAT_IST,実在庫移動日付
+mapping_D:\antigravity\TIC\EXCEL\历史设计书\091_IFZ9000105(管理番号10112)_インタフェース項目定義書_国内出荷連絡データ_R0.81.xlsx_8_backward,[source_system:部品SAP] [source_table:LIKP] [source_field:WADAT_IST] [source_description:実在庫移動日付],部品SAP,LIKP,WADAT_IST,実在庫移動日付,,DSYKDDD,出荷日
+mapping_D:\antigravity\TIC\EXCEL\历史设计书\091_IFZ9000105(管理番号10112)_インタフェース項目定義書_国内出荷連絡データ_R0.81.xlsx_9_forward,[source_system:倉庫システム] [source_table:] [source_field:BSYR] [source_description:出荷連絡No],倉庫システム,,BSYR,出荷連絡No,LIKP,VBELN,出荷伝票番号
+mapping_D:\antigravity\TIC\EXCEL\历史设计书\091_IFZ9000105(管理番号10112)_インタフェース項目定義書_国内出荷連絡データ_R0.81.xlsx_9_backward,[source_system:部品SAP] [source_table:LIKP] [source_field:VBELN] [source_description:出荷伝票番号],部品SAP,LIKP,VBELN,出荷伝票番号,,BSYR,出荷連絡No
+mapping_D:\antigravity\TIC\EXCEL\历史设计书\091_IFZ9000105(管理番号10112)_インタフェース項目定義書_国内出荷連絡データ_R0.81.xlsx_10_forward,[source_system:倉庫システム] [source_table:] [source_field:BSYRGYO] [source_description:出荷連絡L#],倉庫システム,,BSYRGYO,出荷連絡L#,LIPS,POSNR,出荷伝票明細番号
+mapping_D:\antigravity\TIC\EXCEL\历史设计书\091_IFZ9000105(管理番号10112)_インタフェース項目定義書_国内出荷連絡データ_R0.81.xlsx_10_backward,[source_system:部品SAP] [source_table:LIPS] [source_field:POSNR] [source_description:出荷伝票明細番号],部品SAP,LIPS,POSNR,出荷伝票明細番号,,BSYRGYO,出荷連絡L#
+mapping_D:\antigravity\TIC\EXCEL\历史设计书\091_IFZ9000105(管理番号10112)_インタフェース項目定義書_国内出荷連絡データ_R0.81.xlsx_14_forward,[source_system:倉庫システム] [source_table:] [source_field:BYUS] [source_description:便コード],倉庫システム,,BYUS,便コード,LIKP,VSART,出荷タイプ
+mapping_D:\antigravity\TIC\EXCEL\历史设计书\091_IFZ9000105(管理番号10112)_インタフェース項目定義書_国内出荷連絡データ_R0.81.xlsx_14_backward,[source_system:部品SAP] [source_table:LIKP] [source_field:VSART] [source_description:出荷タイプ],部品SAP,LIKP,VSART,出荷タイプ,,BYUS,便コード
+mapping_D:\antigravity\TIC\EXCEL\历史设计书\091_IFZ9000105(管理番号10112)_インタフェース項目定義書_国内出荷連絡データ_R0.81.xlsx_15_forward,[source_system:倉庫システム] [source_table:] [source_field:BUNS] [source_description:運送会社コード],倉庫システム,,BUNS,運送会社コード,LIPS,AESKD,得意先設計変更ステータス
+mapping_D:\antigravity\TIC\EXCEL\历史设计书\091_IFZ9000105(管理番号10112)_インタフェース項目定義書_国内出荷連絡データ_R0.81.xlsx_15_backward,[source_system:部品SAP] [source_table:LIPS] [source_field:AESKD] [source_description:得意先設計変更ステータス],部品SAP,LIPS,AESKD,得意先設計変更ステータス,,BUNS,運送会社コード
+mapping_D:\antigravity\TIC\EXCEL\历史设计书\091_IFZ9000105(管理番号10112)_インタフェース項目定義書_国内出荷連絡データ_R0.81.xlsx_17_forward,[source_system:倉庫システム] [source_table:] [source_field:SKUC] [source_description:口数],倉庫システム,,SKUC,口数,LIPS,EAN11,国際商品コード (EAN/UPC)
+mapping_D:\antigravity\TIC\EXCEL\历史设计书\091_IFZ9000105(管理番号10112)_インタフェース項目定義書_国内出荷連絡データ_R0.81.xlsx_17_backward,[source_system:部品SAP] [source_table:LIPS] [source_field:EAN11] [source_description:国際商品コード (EAN/UPC)],部品SAP,LIPS,EAN11,国際商品コード (EAN/UPC),,SKUC,口数
+mapping_D:\antigravity\TIC\EXCEL\历史设计书\091_IFZ9000105(管理番号10112)_インタフェース項目定義書_国内出荷連絡データ_R0.81.xlsx_20_forward,[source_system:倉庫システム] [source_table:] [source_field:BNFD] [source_description:荷札№],倉庫システム,,BNFD,荷札№,LIPS,AESKD,得意先設計変更ステータス
+mapping_D:\antigravity\TIC\EXCEL\历史设计书\091_IFZ9000105(管理番号10112)_インタフェース項目定義書_国内出荷連絡データ_R0.81.xlsx_20_backward,[source_system:部品SAP] [source_table:LIPS] [source_field:AESKD] [source_description:得意先設計変更ステータス],部品SAP,LIPS,AESKD,得意先設計変更ステータス,,BNFD,荷札№
+mapping_D:\antigravity\TIC\EXCEL\历史设计书\091_IFZ9000105(管理番号10112)_インタフェース項目定義書_国内出荷連絡データ_R0.81.xlsx_21_forward,[source_system:倉庫システム] [source_table:] [source_field:SRSYK] [source_description:出荷連絡数],倉庫システム,,SRSYK,出荷連絡数,LIPS,LFIMG,出荷数量実績 (販売単位)
+mapping_D:\antigravity\TIC\EXCEL\历史设计书\091_IFZ9000105(管理番号10112)_インタフェース項目定義書_国内出荷連絡データ_R0.81.xlsx_21_backward,[source_system:部品SAP] [source_table:LIPS] [source_field:LFIMG] [source_description:出荷数量実績 (販売単位)],部品SAP,LIPS,LFIMG,出荷数量実績 (販売単位),,SRSYK,出荷連絡数
+mapping_D:\antigravity\TIC\EXCEL\历史设计书\091_IFZ9000106(管理番号10124)_インタフェース項目定義書_積送着荷報告データ_R0.81.xlsx_10_forward,[source_system:倉庫システム] [source_table:RZ048] [source_field:DSTYK] [source_description:着荷日],倉庫システム,RZ048,DSTYK,着荷日,MATDOC,BUDAT,転記日付
+mapping_D:\antigravity\TIC\EXCEL\历史设计书\091_IFZ9000106(管理番号10124)_インタフェース項目定義書_積送着荷報告データ_R0.81.xlsx_10_backward,[source_system:部品SAP] [source_table:MATDOC] [source_field:BUDAT] [source_description:転記日付],部品SAP,MATDOC,BUDAT,転記日付,RZ048,DSTYK,着荷日
+mapping_D:\antigravity\TIC\EXCEL\历史设计书\091_IFZ9000106(管理番号10124)_インタフェース項目定義書_積送着荷報告データ_R0.81.xlsx_12_forward,[source_system:倉庫システム] [source_table:RZ048] [source_field:SSUR] [source_description:数量],倉庫システム,RZ048,SSUR,数量,MATDOC,MENGE,数量
+mapping_D:\antigravity\TIC\EXCEL\历史设计书\091_IFZ9000106(管理番号10124)_インタフェース項目定義書_積送着荷報告データ_R0.81.xlsx_12_backward,[source_system:部品SAP] [source_table:MATDOC] [source_field:MENGE] [source_description:数量],部品SAP,MATDOC,MENGE,数量,RZ048,SSUR,数量
+mapping_D:\antigravity\TIC\EXCEL\历史设计书\091_IFZ9000107(管理番号10115)_インタフェース項目定義書_出荷貨物追跡データ_R0.81.xlsx_10_forward,[source_system:倉庫システム] [source_table:] [source_field:BNFD] [source_description:荷札№],倉庫システム,,BNFD,荷札№,LIPS,AESKD,得意先設計変更ステータス
+mapping_D:\antigravity\TIC\EXCEL\历史设计书\091_IFZ9000107(管理番号10115)_インタフェース項目定義書_出荷貨物追跡データ_R0.81.xlsx_10_backward,[source_system:部品SAP] [source_table:LIPS] [source_field:AESKD] [source_description:得意先設計変更ステータス],部品SAP,LIPS,AESKD,得意先設計変更ステータス,,BNFD,荷札№
+mapping_D:\antigravity\TIC\EXCEL\历史设计书\091_IFZ9000107(管理番号10115)_インタフェース項目定義書_出荷貨物追跡データ_R0.81.xlsx_11_forward,[source_system:倉庫システム] [source_table:] [source_field:BTWNO] [source_description:問い合わせ№],倉庫システム,,BTWNO,問い合わせ№,LIPS,EAN11,国際商品コード (EAN/UPC)
+mapping_D:\antigravity\TIC\EXCEL\历史设计书\091_IFZ9000107(管理番号10115)_インタフェース項目定義書_出荷貨物追跡データ_R0.81.xlsx_11_backward,[source_system:部品SAP] [source_table:LIPS] [source_field:EAN11] [source_description:国際商品コード (EAN/UPC)],部品SAP,LIPS,EAN11,国際商品コード (EAN/UPC),,BTWNO,問い合わせ№
+mapping_D:\antigravity\TIC\EXCEL\历史设计书\091_IFZ9000107(管理番号10115)_インタフェース項目定義書_出荷貨物追跡データ_R0.81.xlsx_12_forward,[source_system:倉庫システム] [source_table:] [source_field:BUNS] [source_description:運送会社コード],倉庫システム,,BUNS,運送会社コード,LIPS,AESKD,得意先設計変更ステータス
+mapping_D:\antigravity\TIC\EXCEL\历史设计书\091_IFZ9000107(管理番号10115)_インタフェース項目定義書_出荷貨物追跡データ_R0.81.xlsx_12_backward,[source_system:部品SAP] [source_table:LIPS] [source_field:AESKD] [source_description:得意先設計変更ステータス],部品SAP,LIPS,AESKD,得意先設計変更ステータス,,BUNS,運送会社コード
+mapping_D:\antigravity\TIC\EXCEL\历史设计书\091_IFZ9000107(管理番号10115)_インタフェース項目定義書_出荷貨物追跡データ_R0.81.xlsx_13_forward,[source_system:倉庫システム] [source_table:] [source_field:BYBN] [source_description:輸送便コード],倉庫システム,,BYBN,輸送便コード,VBKD,VSART,出荷タイプ
+mapping_D:\antigravity\TIC\EXCEL\历史设计书\091_IFZ9000107(管理番号10115)_インタフェース項目定義書_出荷貨物追跡データ_R0.81.xlsx_13_backward,[source_system:部品SAP] [source_table:VBKD] [source_field:VSART] [source_description:出荷タイプ],部品SAP,VBKD,VSART,出荷タイプ,,BYBN,輸送便コード
+mapping_D:\antigravity\TIC\EXCEL\历史设计书\091_IFZ9000108(管理番号10118)_インタフェース項目定義書_入庫指示受信データ_R0.81.xlsx_8_forward,[source_system:倉庫システム] [source_table:] [source_field:BSOKMAIN] [source_description:メイン倉庫],倉庫システム,,BSOKMAIN,メイン倉庫,MATDOC,WERKS,プラント
+mapping_D:\antigravity\TIC\EXCEL\历史设计书\091_IFZ9000108(管理番号10118)_インタフェース項目定義書_入庫指示受信データ_R0.81.xlsx_8_backward,[source_system:部品SAP] [source_table:MATDOC] [source_field:WERKS] [source_description:プラント],部品SAP,MATDOC,WERKS,プラント,,BSOKMAIN,メイン倉庫
+mapping_D:\antigravity\TIC\EXCEL\历史设计书\091_IFZ9000108(管理番号10118)_インタフェース項目定義書_入庫指示受信データ_R0.81.xlsx_10_forward,[source_system:倉庫システム] [source_table:] [source_field:BRNO] [source_description:Ｒ＃],倉庫システム,,BRNO,Ｒ＃,MATDOC,BWART,移動タイプ (在庫管理)
+mapping_D:\antigravity\TIC\EXCEL\历史设计书\091_IFZ9000108(管理番号10118)_インタフェース項目定義書_入庫指示受信データ_R0.81.xlsx_10_backward,[source_system:部品SAP] [source_table:MATDOC] [source_field:BWART] [source_description:移動タイプ (在庫管理)],部品SAP,MATDOC,BWART,移動タイプ (在庫管理),,BRNO,Ｒ＃
+mapping_D:\antigravity\TIC\EXCEL\历史设计书\091_IFZ9000108(管理番号10118)_インタフェース項目定義書_入庫指示受信データ_R0.81.xlsx_14_forward,[source_system:倉庫システム] [source_table:] [source_field:SSUR] [source_description:数量],倉庫システム,,SSUR,数量,MATDOC,MENGE,数量
+mapping_D:\antigravity\TIC\EXCEL\历史设计书\091_IFZ9000108(管理番号10118)_インタフェース項目定義書_入庫指示受信データ_R0.81.xlsx_14_backward,[source_system:部品SAP] [source_table:MATDOC] [source_field:MENGE] [source_description:数量],部品SAP,MATDOC,MENGE,数量,,SSUR,数量
+mapping_D:\antigravity\TIC\EXCEL\历史设计书\091_IFZ9000109(管理番号10122)_インタフェース項目定義書_入庫完了データ_R0.81.xlsx_8_forward,[source_system:倉庫システム] [source_table:RZ045] [source_field:BSOKMAIN] [source_description:メイン倉庫],倉庫システム,RZ045,BSOKMAIN,メイン倉庫,MATDOC,WERKS,保管場所間転送のプラント
+mapping_D:\antigravity\TIC\EXCEL\历史设计书\091_IFZ9000109(管理番号10122)_インタフェース項目定義書_入庫完了データ_R0.81.xlsx_8_backward,[source_system:部品SAP] [source_table:MATDOC] [source_field:WERKS] [source_description:保管場所間転送のプラント],部品SAP,MATDOC,WERKS,保管場所間転送のプラント,RZ045,BSOKMAIN,メイン倉庫
+mapping_D:\antigravity\TIC\EXCEL\历史设计书\091_IFZ9000109(管理番号10122)_インタフェース項目定義書_入庫完了データ_R0.81.xlsx_11_forward,[source_system:倉庫システム] [source_table:RZ045] [source_field:BHCHHIN] [source_description:発注品番],倉庫システム,RZ045,BHCHHIN,発注品番,MATDOC,MATNR,品目
+mapping_D:\antigravity\TIC\EXCEL\历史设计书\091_IFZ9000109(管理番号10122)_インタフェース項目定義書_入庫完了データ_R0.81.xlsx_11_backward,[source_system:部品SAP] [source_table:MATDOC] [source_field:MATNR] [source_description:品目],部品SAP,MATDOC,MATNR,品目,RZ045,BHCHHIN,発注品番
+mapping_D:\antigravity\TIC\EXCEL\历史设计书\091_IFZ9000109(管理番号10122)_インタフェース項目定義書_入庫完了データ_R0.81.xlsx_13_forward,[source_system:倉庫システム] [source_table:RZ045] [source_field:BFUG] [source_description:符号],倉庫システム,RZ045,BFUG,符号,MATDOC,BWART,移動タイプ
+mapping_D:\antigravity\TIC\EXCEL\历史设计书\091_IFZ9000109(管理番号10122)_インタフェース項目定義書_入庫完了データ_R0.81.xlsx_13_backward,[source_system:部品SAP] [source_table:MATDOC] [source_field:BWART] [source_description:移動タイプ],部品SAP,MATDOC,BWART,移動タイプ,RZ045,BFUG,符号
+mapping_D:\antigravity\TIC\EXCEL\历史设计书\091_IFZ9000109(管理番号10122)_インタフェース項目定義書_入庫完了データ_R0.81.xlsx_14_forward,[source_system:倉庫システム] [source_table:RZ045] [source_field:SSUR] [source_description:数量],倉庫システム,RZ045,SSUR,数量,MATDOC,MENGE,数量
+mapping_D:\antigravity\TIC\EXCEL\历史设计书\091_IFZ9000109(管理番号10122)_インタフェース項目定義書_入庫完了データ_R0.81.xlsx_14_backward,[source_system:部品SAP] [source_table:MATDOC] [source_field:MENGE] [source_description:数量],部品SAP,MATDOC,MENGE,数量,RZ045,SSUR,数量
+mapping_D:\antigravity\TIC\EXCEL\历史设计书\091_IFZ9000111(管理番号10128)_インタフェース項目定義書_ト・パ基本情報更新データ_R0.81.xlsx_10_forward,[source_system:倉庫システム] [source_table:RM061] [source_field:BHIN] [source_description:品番],倉庫システム,RM061,BHIN,品番,MARA,MATNR,品目
+mapping_D:\antigravity\TIC\EXCEL\历史设计书\091_IFZ9000111(管理番号10128)_インタフェース項目定義書_ト・パ基本情報更新データ_R0.81.xlsx_10_backward,[source_system:部品SAP] [source_table:MARA] [source_field:MATNR] [source_description:品目],部品SAP,MARA,MATNR,品目,RM061,BHIN,品番
+mapping_D:\antigravity\TIC\EXCEL\历史设计书\091_IFZ9000111(管理番号10128)_インタフェース項目定義書_ト・パ基本情報更新データ_R0.81.xlsx_11_forward,[source_system:倉庫システム] [source_table:RM061] [source_field:SSYMSPUHEI] [source_description:正味寸法（高さ）],倉庫システム,RM061,SSYMSPUHEI,正味寸法（高さ）,"MARA
+MARM","HOEHE
+HOEHE","高さ
+MARA：部品単体
+MARM：集合包装、外装、パレット"
+mapping_D:\antigravity\TIC\EXCEL\历史设计书\091_IFZ9000111(管理番号10128)_インタフェース項目定義書_ト・パ基本情報更新データ_R0.81.xlsx_11_backward,"[source_system:部品SAP] [source_table:MARA
+MARM] [source_field:HOEHE
+HOEHE] [source_description:高さ
+MARA：部品単体
+MARM：集合包装、外装、パレット]",部品SAP,"MARA
+MARM","HOEHE
+HOEHE","高さ
+MARA：部品単体
+MARM：集合包装、外装、パレット",RM061,SSYMSPUHEI,正味寸法（高さ）
+mapping_D:\antigravity\TIC\EXCEL\历史设计书\091_IFZ9000111(管理番号10128)_インタフェース項目定義書_ト・パ基本情報更新データ_R0.81.xlsx_12_forward,[source_system:倉庫システム] [source_table:RM061] [source_field:SSYMSPUHBA] [source_description:正味寸法（幅）],倉庫システム,RM061,SSYMSPUHBA,正味寸法（幅）,"MARA
+MARM","BREIT
+BREIT","横の長さ
+MARA：部品単体
+MARM：集合包装、外装、パレット"
+mapping_D:\antigravity\TIC\EXCEL\历史设计书\091_IFZ9000111(管理番号10128)_インタフェース項目定義書_ト・パ基本情報更新データ_R0.81.xlsx_12_backward,"[source_system:部品SAP] [source_table:MARA
+MARM] [source_field:BREIT
+BREIT] [source_description:横の長さ
+MARA：部品単体
+MARM：集合包装、外装、パレット]",部品SAP,"MARA
+MARM","BREIT
+BREIT","横の長さ
+MARA：部品単体
+MARM：集合包装、外装、パレット",RM061,SSYMSPUHBA,正味寸法（幅）
+mapping_D:\antigravity\TIC\EXCEL\历史设计书\091_IFZ9000111(管理番号10128)_インタフェース項目定義書_ト・パ基本情報更新データ_R0.81.xlsx_13_forward,[source_system:倉庫システム] [source_table:RM061] [source_field:SSYMSPUDEP] [source_description:正味寸法（奥行き）],倉庫システム,RM061,SSYMSPUDEP,正味寸法（奥行き）,"MARA
+MARM","LAENG
+LAENG","縦の長さ
+MARA：部品単体
+MARM：集合包装、外装、パレット"
+mapping_D:\antigravity\TIC\EXCEL\历史设计书\091_IFZ9000111(管理番号10128)_インタフェース項目定義書_ト・パ基本情報更新データ_R0.81.xlsx_13_backward,"[source_system:部品SAP] [source_table:MARA
+MARM] [source_field:LAENG
+LAENG] [source_description:縦の長さ
+MARA：部品単体
+MARM：集合包装、外装、パレット]",部品SAP,"MARA
+MARM","LAENG
+LAENG","縦の長さ
+MARA：部品単体
+MARM：集合包装、外装、パレット",RM061,SSYMSPUDEP,正味寸法（奥行き）
+mapping_D:\antigravity\TIC\EXCEL\历史设计书\091_IFZ9000111(管理番号10128)_インタフェース項目定義書_ト・パ基本情報更新データ_R0.81.xlsx_14_forward,[source_system:倉庫システム] [source_table:RM061] [source_field:SSYMGYU] [source_description:正味重量],倉庫システム,RM061,SSYMGYU,正味重量,MARA,NTGEW,正味重量
+mapping_D:\antigravity\TIC\EXCEL\历史设计书\091_IFZ9000111(管理番号10128)_インタフェース項目定義書_ト・パ基本情報更新データ_R0.81.xlsx_14_backward,[source_system:部品SAP] [source_table:MARA] [source_field:NTGEW] [source_description:正味重量],部品SAP,MARA,NTGEW,正味重量,RM061,SSYMGYU,正味重量
+mapping_D:\antigravity\TIC\EXCEL\历史设计书\091_IFZ9000111(管理番号10128)_インタフェース項目定義書_ト・パ基本情報更新データ_R0.81.xlsx_15_forward,[source_system:倉庫システム] [source_table:RM061] [source_field:SHSOGYU] [source_description:包装重量],倉庫システム,RM061,SHSOGYU,包装重量,"MARA
+MARM","BRGEW
+BRGEW","総重量
+MARA：個装重量（単体重量＋風袋重量）
+MARM：集合包装、外装、パレットの総重量"
+mapping_D:\antigravity\TIC\EXCEL\历史设计书\091_IFZ9000111(管理番号10128)_インタフェース項目定義書_ト・パ基本情報更新データ_R0.81.xlsx_15_backward,"[source_system:部品SAP] [source_table:MARA
+MARM] [source_field:BRGEW
+BRGEW] [source_description:総重量
+MARA：個装重量（単体重量＋風袋重量）
+MARM：集合包装、外装、パレットの総重量]",部品SAP,"MARA
+MARM","BRGEW
+BRGEW","総重量
+MARA：個装重量（単体重量＋風袋重量）
+MARM：集合包装、外装、パレットの総重量",RM061,SHSOGYU,包装重量
+mapping_D:\antigravity\TIC\EXCEL\历史设计书\091_IFZ9000114(管理番号10113)_インタフェース項目定義書_輸出梱包情報_R0.81.xlsx_9_forward,[source_system:倉庫システム] [source_table:] [source_field:BCAS1] [source_description:ケース№１],倉庫システム,,BCAS1,ケース№１,VEKP,EXIDV,外部荷役単位ID
+mapping_D:\antigravity\TIC\EXCEL\历史设计书\091_IFZ9000114(管理番号10113)_インタフェース項目定義書_輸出梱包情報_R0.81.xlsx_9_backward,[source_system:部品SAP] [source_table:VEKP] [source_field:EXIDV] [source_description:外部荷役単位ID],部品SAP,VEKP,EXIDV,外部荷役単位ID,,BCAS1,ケース№１
+mapping_D:\antigravity\TIC\EXCEL\历史设计书\091_IFZ9000114(管理番号10113)_インタフェース項目定義書_輸出梱包情報_R0.81.xlsx_14_forward,[source_system:倉庫システム] [source_table:] [source_field:BSYR] [source_description:出荷連絡№],倉庫システム,,BSYR,出荷連絡№,VEPO,VBELN,出荷伝票
+mapping_D:\antigravity\TIC\EXCEL\历史设计书\091_IFZ9000114(管理番号10113)_インタフェース項目定義書_輸出梱包情報_R0.81.xlsx_14_backward,[source_system:部品SAP] [source_table:VEPO] [source_field:VBELN] [source_description:出荷伝票],部品SAP,VEPO,VBELN,出荷伝票,,BSYR,出荷連絡№
+mapping_D:\antigravity\TIC\EXCEL\历史设计书\091_IFZ9000114(管理番号10113)_インタフェース項目定義書_輸出梱包情報_R0.81.xlsx_15_forward,[source_system:倉庫システム] [source_table:] [source_field:BSYRGYO] [source_description:出荷連絡行番号],倉庫システム,,BSYRGYO,出荷連絡行番号,VEPO,POSNR,出荷伝票明細
+mapping_D:\antigravity\TIC\EXCEL\历史设计书\091_IFZ9000114(管理番号10113)_インタフェース項目定義書_輸出梱包情報_R0.81.xlsx_15_backward,[source_system:部品SAP] [source_table:VEPO] [source_field:POSNR] [source_description:出荷伝票明細],部品SAP,VEPO,POSNR,出荷伝票明細,,BSYRGYO,出荷連絡行番号
+mapping_D:\antigravity\TIC\EXCEL\历史设计书\091_IFZ9000114(管理番号10113)_インタフェース項目定義書_輸出梱包情報_R0.81.xlsx_18_forward,[source_system:倉庫システム] [source_table:] [source_field:SKOP] [source_description:梱包数],倉庫システム,,SKOP,梱包数,VEPO,VEMNG,梱包済数量
+mapping_D:\antigravity\TIC\EXCEL\历史设计书\091_IFZ9000114(管理番号10113)_インタフェース項目定義書_輸出梱包情報_R0.81.xlsx_18_backward,[source_system:部品SAP] [source_table:VEPO] [source_field:VEMNG] [source_description:梱包済数量],部品SAP,VEPO,VEMNG,梱包済数量,,SKOP,梱包数
+mapping_D:\antigravity\TIC\EXCEL\历史设计书\091_IFZ9000114(管理番号10113)_インタフェース項目定義書_輸出梱包情報_R0.81.xlsx_19_forward,[source_system:倉庫システム] [source_table:] [source_field:BNACCAS] [source_description:内装ケース№],倉庫システム,,BNACCAS,内装ケース№,VEKP,EXIDV,外部荷役単位ID
+mapping_D:\antigravity\TIC\EXCEL\历史设计书\091_IFZ9000114(管理番号10113)_インタフェース項目定義書_輸出梱包情報_R0.81.xlsx_19_backward,[source_system:部品SAP] [source_table:VEKP] [source_field:EXIDV] [source_description:外部荷役単位ID],部品SAP,VEKP,EXIDV,外部荷役単位ID,,BNACCAS,内装ケース№
+mapping_D:\antigravity\TIC\EXCEL\历史设计书\091_IFZ9000114(管理番号10113)_インタフェース項目定義書_輸出梱包情報_R0.81.xlsx_20_forward,[source_system:倉庫システム] [source_table:] [source_field:SKOPGYU] [source_description:梱包重量],倉庫システム,,SKOPGYU,梱包重量,VEKP,BRGEW,荷役単位の総重量
+mapping_D:\antigravity\TIC\EXCEL\历史设计书\091_IFZ9000114(管理番号10113)_インタフェース項目定義書_輸出梱包情報_R0.81.xlsx_20_backward,[source_system:部品SAP] [source_table:VEKP] [source_field:BRGEW] [source_description:荷役単位の総重量],部品SAP,VEKP,BRGEW,荷役単位の総重量,,SKOPGYU,梱包重量
+mapping_D:\antigravity\TIC\EXCEL\历史设计书\091_IFZ9000114(管理番号10113)_インタフェース項目定義書_輸出梱包情報_R0.81.xlsx_21_forward,[source_system:倉庫システム] [source_table:] [source_field:SYSK] [source_description:容積],倉庫システム,,SYSK,容積,VEKP,BTVOL,荷役単位の総容積
+mapping_D:\antigravity\TIC\EXCEL\历史设计书\091_IFZ9000114(管理番号10113)_インタフェース項目定義書_輸出梱包情報_R0.81.xlsx_21_backward,[source_system:部品SAP] [source_table:VEKP] [source_field:BTVOL] [source_description:荷役単位の総容積],部品SAP,VEKP,BTVOL,荷役単位の総容積,,SYSK,容積
+mapping_D:\antigravity\TIC\EXCEL\历史设计书\091_IFZ9000114(管理番号10113)_インタフェース項目定義書_輸出梱包情報_R0.81.xlsx_22_forward,[source_system:倉庫システム] [source_table:] [source_field:XDIM] [source_description:ディメンション],倉庫システム,,XDIM,ディメンション,"VEKP
+VEKP
+VEKP","LAENG
+BREIT
+HOEHE","奥行
+幅
+高さ"
+mapping_D:\antigravity\TIC\EXCEL\历史设计书\091_IFZ9000114(管理番号10113)_インタフェース項目定義書_輸出梱包情報_R0.81.xlsx_22_backward,"[source_system:部品SAP] [source_table:VEKP
+VEKP
+VEKP] [source_field:LAENG
+BREIT
+HOEHE] [source_description:奥行
+幅
+高さ]",部品SAP,"VEKP
+VEKP
+VEKP","LAENG
+BREIT
+HOEHE","奥行
+幅
+高さ",,XDIM,ディメンション
+mapping_D:\antigravity\TIC\EXCEL\历史设计书\091_IFZ9000114(管理番号10113)_インタフェース項目定義書_輸出梱包情報_R0.81.xlsx_23_forward,[source_system:倉庫システム] [source_table:] [source_field:BNSG] [source_description:荷姿],倉庫システム,,BNSG,荷姿,VEKP,VHILM,梱包材
+mapping_D:\antigravity\TIC\EXCEL\历史设计书\091_IFZ9000114(管理番号10113)_インタフェース項目定義書_輸出梱包情報_R0.81.xlsx_23_backward,[source_system:部品SAP] [source_table:VEKP] [source_field:VHILM] [source_description:梱包材],部品SAP,VEKP,VHILM,梱包材,,BNSG,荷姿
+mapping_D:\antigravity\TIC\EXCEL\历史设计书\091_IFZ9000114(管理番号10113)_インタフェース項目定義書_輸出梱包情報_R0.81.xlsx_24_forward,[source_system:倉庫システム] [source_table:] [source_field:SCTN] [source_description:カートン数],倉庫システム,,SCTN,カートン数,VEKP,INHALT,出荷単位内容のテキスト
+mapping_D:\antigravity\TIC\EXCEL\历史设计书\091_IFZ9000114(管理番号10113)_インタフェース項目定義書_輸出梱包情報_R0.81.xlsx_24_backward,[source_system:部品SAP] [source_table:VEKP] [source_field:INHALT] [source_description:出荷単位内容のテキスト],部品SAP,VEKP,INHALT,出荷単位内容のテキスト,,SCTN,カートン数
+mapping_D:\antigravity\TIC\EXCEL\历史设计书\091_IFZ9000115(管理番号10114)_インタフェース項目定義書_輸出出荷連絡データ_R0.81.xlsx_8_forward,[source_system:倉庫システム] [source_table:] [source_field:DSYKDDD] [source_description:出荷日],倉庫システム,,DSYKDDD,出荷日,LIKP,WADAT,計画在庫移動日付
+mapping_D:\antigravity\TIC\EXCEL\历史设计书\091_IFZ9000115(管理番号10114)_インタフェース項目定義書_輸出出荷連絡データ_R0.81.xlsx_8_backward,[source_system:部品SAP] [source_table:LIKP] [source_field:WADAT] [source_description:計画在庫移動日付],部品SAP,LIKP,WADAT,計画在庫移動日付,,DSYKDDD,出荷日
+mapping_D:\antigravity\TIC\EXCEL\历史设计书\091_IFZ9000115(管理番号10114)_インタフェース項目定義書_輸出出荷連絡データ_R0.81.xlsx_9_forward,[source_system:倉庫システム] [source_table:] [source_field:BSYR] [source_description:出荷連絡No],倉庫システム,,BSYR,出荷連絡No,LIKP,VBELN,出荷伝票
+mapping_D:\antigravity\TIC\EXCEL\历史设计书\091_IFZ9000115(管理番号10114)_インタフェース項目定義書_輸出出荷連絡データ_R0.81.xlsx_9_backward,[source_system:部品SAP] [source_table:LIKP] [source_field:VBELN] [source_description:出荷伝票],部品SAP,LIKP,VBELN,出荷伝票,,BSYR,出荷連絡No
+mapping_D:\antigravity\TIC\EXCEL\历史设计书\091_IFZ9000118(管理番号10107)_インタフェース項目定義書_運賃計上ファイル（WPC)_R0.81.xlsx_7_forward,[source_system:倉庫システム] [source_table:] [source_field:DUNTKJOYMD] [source_description:計上年月日],倉庫システム,,DUNTKJOYMD,計上年月日,VBKD,FKDAT,請求日
+mapping_D:\antigravity\TIC\EXCEL\历史设计书\091_IFZ9000118(管理番号10107)_インタフェース項目定義書_運賃計上ファイル（WPC)_R0.81.xlsx_7_backward,[source_system:部品SAP] [source_table:VBKD] [source_field:FKDAT] [source_description:請求日],部品SAP,VBKD,FKDAT,請求日,,DUNTKJOYMD,計上年月日
+mapping_D:\antigravity\TIC\EXCEL\历史设计书\091_IFZ9000118(管理番号10107)_インタフェース項目定義書_運賃計上ファイル（WPC)_R0.81.xlsx_9_forward,[source_system:倉庫システム] [source_table:] [source_field:KTTKUNT] [source_description:立替運賃],倉庫システム,,KTTKUNT,立替運賃,VBAP,NETWR,伝票通貨での受注明細正味額
+mapping_D:\antigravity\TIC\EXCEL\历史设计书\091_IFZ9000118(管理番号10107)_インタフェース項目定義書_運賃計上ファイル（WPC)_R0.81.xlsx_9_backward,[source_system:部品SAP] [source_table:VBAP] [source_field:NETWR] [source_description:伝票通貨での受注明細正味額],部品SAP,VBAP,NETWR,伝票通貨での受注明細正味額,,KTTKUNT,立替運賃
+mapping_D:\antigravity\TIC\EXCEL\历史设计书\091_IFZ9000123(管理番号10120)_インタフェース項目定義書_完備品出庫指示送信データ_R0.81.xlsx_10_forward,[source_system:部品SAP] [source_table:EBAN] [source_field:FLIEF] [source_description:固定仕入先],部品SAP,EBAN,FLIEF,固定仕入先,RJ071,BTKU,得意先コード
+mapping_D:\antigravity\TIC\EXCEL\历史设计书\091_IFZ9000123(管理番号10120)_インタフェース項目定義書_完備品出庫指示送信データ_R0.81.xlsx_10_backward,[source_system:倉庫システム] [source_table:RJ071] [source_field:BTKU] [source_description:得意先コード],倉庫システム,RJ071,BTKU,得意先コード,EBAN,FLIEF,固定仕入先
+mapping_D:\antigravity\TIC\EXCEL\历史设计书\091_IFZ9000123(管理番号10120)_インタフェース項目定義書_完備品出庫指示送信データ_R0.81.xlsx_22_forward,[source_system:部品SAP] [source_table:AUFK] [source_field:AUFNR] [source_description:指図番号],部品SAP,AUFK,AUFNR,指図番号,RJ071,BODR,オーダー№
+mapping_D:\antigravity\TIC\EXCEL\历史设计书\091_IFZ9000123(管理番号10120)_インタフェース項目定義書_完備品出庫指示送信データ_R0.81.xlsx_22_backward,[source_system:倉庫システム] [source_table:RJ071] [source_field:BODR] [source_description:オーダー№],倉庫システム,RJ071,BODR,オーダー№,AUFK,AUFNR,指図番号
+mapping_D:\antigravity\TIC\EXCEL\历史设计书\091_IFZ9000123(管理番号10120)_インタフェース項目定義書_完備品出庫指示送信データ_R0.81.xlsx_23_forward,"[source_system:部品SAP] [source_table:ADRC
+ADRC] [source_field:NAME1
+NAME2] [source_description:名称1＋名称2
+(国際バージョン：カナ)]",部品SAP,"ADRC
+ADRC","NAME1
+NAME2","名称1＋名称2
+(国際バージョン：カナ)",RJ071,NTKUKN,得意先名
+mapping_D:\antigravity\TIC\EXCEL\历史设计书\091_IFZ9000123(管理番号10120)_インタフェース項目定義書_完備品出庫指示送信データ_R0.81.xlsx_23_backward,[source_system:倉庫システム] [source_table:RJ071] [source_field:NTKUKN] [source_description:得意先名],倉庫システム,RJ071,NTKUKN,得意先名,"ADRC
+ADRC","NAME1
+NAME2","名称1＋名称2
+(国際バージョン：カナ)"
+mapping_D:\antigravity\TIC\EXCEL\历史设计书\091_IFZ9000123(管理番号10120)_インタフェース項目定義書_完備品出庫指示送信データ_R0.81.xlsx_30_forward,"[source_system:部品SAP] [source_table:EBAN
+EBAN
+RESB
+MAKT
+アドオン] [source_field:BANFN
+EKGRP
+MATNR
+MAKTX
+A/Cコード] [source_description:購買依頼番号
+購買グループ
+品目コード
+品目テキスト
+A/Cコード]",部品SAP,"EBAN
+EBAN
+RESB
+MAKT
+アドオン","BANFN
+EKGRP
+MATNR
+MAKTX
+A/Cコード","購買依頼番号
+購買グループ
+品目コード
+品目テキスト
+A/Cコード",RJ071,XREJ,連絡事項
+mapping_D:\antigravity\TIC\EXCEL\历史设计书\091_IFZ9000123(管理番号10120)_インタフェース項目定義書_完備品出庫指示送信データ_R0.81.xlsx_30_backward,[source_system:倉庫システム] [source_table:RJ071] [source_field:XREJ] [source_description:連絡事項],倉庫システム,RJ071,XREJ,連絡事項,"EBAN
+EBAN
+RESB
+MAKT
+アドオン","BANFN
+EKGRP
+MATNR
+MAKTX
+A/Cコード","購買依頼番号
+購買グループ
+品目コード
+品目テキスト
+A/Cコード"
+mapping_D:\antigravity\TIC\EXCEL\历史设计书\091_IFZ9000123(管理番号10120)_インタフェース項目定義書_完備品出庫指示送信データ_R0.81.xlsx_44_forward,[source_system:部品SAP] [source_table:AUFM] [source_field:MATNR] [source_description:品目コード],部品SAP,AUFM,MATNR,品目コード,RJ071,BKSAHIN,検索品番
+mapping_D:\antigravity\TIC\EXCEL\历史设计书\091_IFZ9000123(管理番号10120)_インタフェース項目定義書_完備品出庫指示送信データ_R0.81.xlsx_44_backward,[source_system:倉庫システム] [source_table:RJ071] [source_field:BKSAHIN] [source_description:検索品番],倉庫システム,RJ071,BKSAHIN,検索品番,AUFM,MATNR,品目コード
+mapping_D:\antigravity\TIC\EXCEL\历史设计书\091_IFZ9000123(管理番号10120)_インタフェース項目定義書_完備品出庫指示送信データ_R0.81.xlsx_77_forward,[source_system:部品SAP] [source_table:LIKP] [source_field:VBELN] [source_description:出荷伝票],部品SAP,LIKP,VBELN,出荷伝票,RJ071,BSYR,出荷連絡№
+mapping_D:\antigravity\TIC\EXCEL\历史设计书\091_IFZ9000123(管理番号10120)_インタフェース項目定義書_完備品出庫指示送信データ_R0.81.xlsx_77_backward,[source_system:倉庫システム] [source_table:RJ071] [source_field:BSYR] [source_description:出荷連絡№],倉庫システム,RJ071,BSYR,出荷連絡№,LIKP,VBELN,出荷伝票
+mapping_D:\antigravity\TIC\EXCEL\历史设计书\091_IFZ9000123(管理番号10120)_インタフェース項目定義書_完備品出庫指示送信データ_R0.81.xlsx_80_forward,[source_system:部品SAP] [source_table:EBAN] [source_field:WERKS] [source_description:プラント],部品SAP,EBAN,WERKS,プラント,RJ071,CHKASOKOYA,引当倉庫・親倉庫
+mapping_D:\antigravity\TIC\EXCEL\历史设计书\091_IFZ9000123(管理番号10120)_インタフェース項目定義書_完備品出庫指示送信データ_R0.81.xlsx_80_backward,[source_system:倉庫システム] [source_table:RJ071] [source_field:CHKASOKOYA] [source_description:引当倉庫・親倉庫],倉庫システム,RJ071,CHKASOKOYA,引当倉庫・親倉庫,EBAN,WERKS,プラント
+mapping_D:\antigravity\TIC\EXCEL\历史设计书\091_IFZ9000123(管理番号10120)_インタフェース項目定義書_完備品出庫指示送信データ_R0.81.xlsx_96_forward,[source_system:部品SAP] [source_table:AUFM] [source_field:ZEILE] [source_description:入出庫伝票明細],部品SAP,AUFM,ZEILE,入出庫伝票明細,RJ071,BSYRGYO,出荷ライン№
+mapping_D:\antigravity\TIC\EXCEL\历史设计书\091_IFZ9000123(管理番号10120)_インタフェース項目定義書_完備品出庫指示送信データ_R0.81.xlsx_96_backward,[source_system:倉庫システム] [source_table:RJ071] [source_field:BSYRGYO] [source_description:出荷ライン№],倉庫システム,RJ071,BSYRGYO,出荷ライン№,AUFM,ZEILE,入出庫伝票明細
+mapping_D:\antigravity\TIC\EXCEL\历史设计书\091_IFZ9000123(管理番号10120)_インタフェース項目定義書_完備品出庫指示送信データ_R0.81.xlsx_97_forward,[source_system:部品SAP] [source_table:AUFM] [source_field:MENGE] [source_description:数量],部品SAP,AUFM,MENGE,数量,RJ071,SSYJ,出荷指示数
+mapping_D:\antigravity\TIC\EXCEL\历史设计书\091_IFZ9000123(管理番号10120)_インタフェース項目定義書_完備品出庫指示送信データ_R0.81.xlsx_97_backward,[source_system:倉庫システム] [source_table:RJ071] [source_field:SSYJ] [source_description:出荷指示数],倉庫システム,RJ071,SSYJ,出荷指示数,AUFM,MENGE,数量
+mapping_D:\antigravity\TIC\EXCEL\历史设计书\091_IFZ9000123(管理番号10120)_インタフェース項目定義書_完備品出庫指示送信データ_R0.81.xlsx_104_forward,[source_system:部品SAP] [source_table:AUFK] [source_field:AUFNR] [source_description:指図番号],部品SAP,AUFK,AUFNR,指図番号,RJ071,BSYUTKUNOS,集約得意先納所
+mapping_D:\antigravity\TIC\EXCEL\历史设计书\091_IFZ9000123(管理番号10120)_インタフェース項目定義書_完備品出庫指示送信データ_R0.81.xlsx_104_backward,[source_system:倉庫システム] [source_table:RJ071] [source_field:BSYUTKUNOS] [source_description:集約得意先納所],倉庫システム,RJ071,BSYUTKUNOS,集約得意先納所,AUFK,AUFNR,指図番号
+mapping_D:\antigravity\TIC\EXCEL\历史设计书\091_IFZ9000126(管理番号10111)_インタフェース項目定義書_塗装包装中在庫データ連携(EPC)_R0.81.xlsx_8_forward,[source_system:部品SAP] [source_table:MARD] [source_field:MATNR] [source_description:品目コード],部品SAP,MARD,MATNR,品目コード,RZ019,BHIN,品番
+mapping_D:\antigravity\TIC\EXCEL\历史设计书\091_IFZ9000126(管理番号10111)_インタフェース項目定義書_塗装包装中在庫データ連携(EPC)_R0.81.xlsx_8_backward,[source_system:倉庫システム] [source_table:RZ019] [source_field:BHIN] [source_description:品番],倉庫システム,RZ019,BHIN,品番,MARD,MATNR,品目コード
+mapping_D:\antigravity\TIC\EXCEL\历史设计书\091_IFZ9000126(管理番号10111)_インタフェース項目定義書_塗装包装中在庫データ連携(EPC)_R0.81.xlsx_9_forward,[source_system:部品SAP] [source_table:MARD] [source_field:WERKS] [source_description:プラント],部品SAP,MARD,WERKS,プラント,RZ019,CPC,ＰＣコード
+mapping_D:\antigravity\TIC\EXCEL\历史设计书\091_IFZ9000126(管理番号10111)_インタフェース項目定義書_塗装包装中在庫データ連携(EPC)_R0.81.xlsx_9_backward,[source_system:倉庫システム] [source_table:RZ019] [source_field:CPC] [source_description:ＰＣコード],倉庫システム,RZ019,CPC,ＰＣコード,MARD,WERKS,プラント
+mapping_D:\antigravity\TIC\EXCEL\历史设计书\091_IFZ9000126(管理番号10111)_インタフェース項目定義書_塗装包装中在庫データ連携(EPC)_R0.81.xlsx_25_forward,[source_system:部品SAP] [source_table:MARD] [source_field:LABST] [source_description:利用可能評価在庫],部品SAP,MARD,LABST,利用可能評価在庫,RZ019,SPACZAI,パッケージ中在庫数
+mapping_D:\antigravity\TIC\EXCEL\历史设计书\091_IFZ9000126(管理番号10111)_インタフェース項目定義書_塗装包装中在庫データ連携(EPC)_R0.81.xlsx_25_backward,[source_system:倉庫システム] [source_table:RZ019] [source_field:SPACZAI] [source_description:パッケージ中在庫数],倉庫システム,RZ019,SPACZAI,パッケージ中在庫数,MARD,LABST,利用可能評価在庫
